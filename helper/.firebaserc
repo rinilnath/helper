@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "helper-c83b5": {
+      "hosting": {
+        "helper": [
+          "helper-c83b5"
+        ]
+      }
+    }
+  }
+}
