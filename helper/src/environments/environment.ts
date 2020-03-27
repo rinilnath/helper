@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   firebase: {
-    
-
+    apiKey: 'dont commit with API-Key',
+    projectId: 'helper-c83b5',
   }
 };
 
