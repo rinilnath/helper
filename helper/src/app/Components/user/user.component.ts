@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRequestsService } from '../shared/user-requests.service';
+
 import { NgForm } from '@angular/forms';
+import { UserRequestsService } from 'src/app/Services/user-requests.service';
 
 @Component({
   selector: 'app-user',
