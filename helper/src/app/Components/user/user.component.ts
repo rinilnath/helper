@@ -51,14 +51,6 @@ export class UserComponent implements OnInit {
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
     this.windowRef.recaptchaVerifier.render();
     this.resetForm();
-    this.userRequest.getRequest().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ... (item.payload.doc.data()) as UserRequest
-        }
-      })
-    });
   }
 
 
@@ -80,6 +72,8 @@ export class UserComponent implements OnInit {
   }
 
   verifyLoginCode() {
+    // fetching db request for varification of mobile number    
+    this.getRequest();
     this.windowRef.confirmationResult
       .confirm(this.verificationCode)
       .then(result => {
@@ -93,6 +87,7 @@ export class UserComponent implements OnInit {
   onSubmitNumber() {
     let num = this.trackingNumber;
     let userdet = [];
+    this.getRequest();
     this.list.forEach(function (value) {
       if (num == value.mobile) {
         userdet.push(value);
@@ -101,19 +96,29 @@ export class UserComponent implements OnInit {
     this.userDetails = userdet;
   }
 
+  getRequest() {
+    this.userRequest.getRequest().subscribe(actionArray => {
+      this.list = actionArray.map(item => {
+        return {
+          id: item.payload.doc.id,
+          ... (item.payload.doc.data()) as UserRequest
+        }
+      })
+    });
+  }
+
   onSubmit(form: NgForm) {
     let data = form.value;
     let flag = false;
-    this.list.forEach(function (value) {
-      if (value.mobile == data.mobile) {
-        flag = true;
-      }
-    });
-    
     if (this.user == undefined) {
       alert("Mobile Number not verified")
     } else {
       if (form.valid) {
+        this.list.forEach(function (value) {
+          if (value.mobile == data.mobile) {
+            flag = true;
+          }
+        });
         if (flag) {
           $('.modal-body').html("<p>Already a request is pending in this number</p><p>Please wait till get it resolved</p>");
           $('#myModal').modal('show');

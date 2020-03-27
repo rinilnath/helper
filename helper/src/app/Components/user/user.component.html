@@ -1,6 +1,6 @@
 <div class="container my-4">
     <div>
-        <h1 style="text-align: center;">Sahay</h1>
+        <h1 style="text-align: center;">Sahayi</h1>
     </div>
     <form #form="ngForm" autocomplete="off">
         <div class="form-group">
@@ -33,7 +33,7 @@
 
         <p>Verify Captcha</p>
 
-        <button class="btn btn-primary my-2" (click)="sendLoginCode()">SMS Text Login Code</button>
+        <button class="btn btn-primary my-2" (click)="sendLoginCode()">Send OTP</button>
 
         <div *ngIf="windowRef.confirmationResult">
 
@@ -43,7 +43,7 @@
             <button class="btn btn-primary m-2" (click)="verifyLoginCode()">Verify</button>
         </div>
 
-        <div *ngIf="user">
+        <div *ngIf="user" class="alert alert-success my-2">
             Successfully verified your mobile number
         </div>
 
