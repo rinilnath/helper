@@ -23,7 +23,7 @@ import { AngularFirestoreModule} from '@angular/fire/firestore/';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
   ],
   providers: [UserRequestsService],

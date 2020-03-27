@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let data = form.value;
+    this.userRequest.addRequest(data);
   }
 
   resetForm(form?: NgForm) {
