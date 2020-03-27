@@ -17,4 +17,8 @@ export class UserRequestsService {
     console.log(data);
     this.fire.collection("userRequest").add(data);
   }
+
+  getRequest() {
+    return this.fire.collection("userRequest").snapshotChanges();
+  }
 }
