@@ -7,19 +7,25 @@ import "firebase/firestore"
 export class DataService {
 
   constructor(public fire: AngularFirestore) { }
-  addLocalBody(uid,data) {
+  addLocalBody(uid, data) {
     return this.fire.collection("localbodies").doc(uid).set(data)
   }
-  getUserData(uid){
+  getUserData(uid) {
     return this.fire.collection("localbodies").doc(uid).get()
   }
-  addVolunteer(uid,data) {
+  addVolunteer(uid, data) {
     return this.fire.collection("volunteers").doc(uid).set(data)
   }
-  getVolunteers(district,localbody){
-    return this.fire.collection("volunteers",ref=>ref.where('district','==',district).where('localbody','==',localbody))
+  getVolunteers(district, localbody) {
+    return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody))
   }
-  getAllVolunteers(district,localbody){
-    return this.fire.collection("volunteers",ref=>ref.where('district','==',district).where('localbody','==',localbody));
+  getAllVolunteers(district, localbody) {
+    return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody));
+  }
+  getVolunteerTaskList(uid) {
+    return this.fire.collection("userRequest", ref => ref.where('volunteerId', '==', uid))
+  }
+  getVolunteer(uid) {
+    return this.fire.collection("volunteers").doc(uid)
   }
 }

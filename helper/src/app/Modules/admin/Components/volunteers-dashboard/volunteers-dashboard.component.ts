@@ -13,23 +13,22 @@ import { Observable } from 'rxjs';
 export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist: Observable<any[]>
+  volunteerTaskList: Observable<any[]>
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
-    this.dataservice.getAllVolunteers(localStorage.getItem("District"),
-      localStorage.getItem("LocalBody"))
 
-    this.volunteerlist = this.dataservice.getAllVolunteers(localStorage.getItem("District"),
-      localStorage.getItem("LocalBody")).valueChanges()
+    console.log(localStorage.getItem("userId"))
+
+    this.volunteerTaskList = this.dataservice.getVolunteerTaskList(localStorage.getItem("userId")).valueChanges();
+
   }
 
 
 
   ngOnInit(): void {
-    let user = this.auth.getUserDetails();
+     this.auth.getUserDetails();
 
-    console.log(user);
-
-    console.log("data list", this.volunteerlist);
+    console.log("volunteer data", this.volunteerTaskList)
   }
 
 }
