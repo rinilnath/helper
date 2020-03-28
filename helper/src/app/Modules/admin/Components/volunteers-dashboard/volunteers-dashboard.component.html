@@ -10,11 +10,14 @@
                     <div class="col-md-32 px-2 pt-4 pb-2">
                         <div class="card shadow-lg rounded ">
                             <ul class="p-0">
-                                <li class="row py-4 border-bottom" *ngFor="let task of volunteerTaskList | async">
+                                <li class="row py-4 border-bottom" *ngFor="let task of volunteerTaskList">
                                    <div class="col">name :{{task.username}}</div> 
                                    <div class="col">phone :{{task.mobile}}</div> 
                                    <div class="col"> require item: {{task.requireditem}}</div>
                                    <div class="col">status: {{task.status}}</div>
+                                   <div *ngIf="task.status == 'pending'" >
+                                   <button  (click)="onDone(task)"> done</button>
+                                   </div>
                                 </li>
                             </ul>
                         </div>

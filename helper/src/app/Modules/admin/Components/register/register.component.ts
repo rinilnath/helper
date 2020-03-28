@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
           }).then(async data => {
             console.log(data)
             this.processing=''
-            this.success = "Seccesfuly registered . Redirecting you to dashboard"
+            this.success = "Succesfuly registered . Redirecting you to dashboard"
             await this.authservice.signout()
             this.router.navigate(['admin/dash'])
           })

@@ -3,6 +3,8 @@ import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../Services/data.service';
 import { Observable } from 'rxjs';
+import { UserRequest } from 'src/app/Services/userRequest.model';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,22 +15,30 @@ import { Observable } from 'rxjs';
 export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist: Observable<any[]>
-  volunteerTaskList: Observable<any[]>
+  volunteerTaskList: UserRequest[]
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
 
-    console.log(localStorage.getItem("userId"))
-
-    this.volunteerTaskList = this.dataservice.getVolunteerTaskList(localStorage.getItem("userId")).valueChanges();
+    this.dataservice.getVolunteerTaskList(localStorage.getItem("userId")).subscribe(data => {
+      this.volunteerTaskList = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as UserRequest
+        };
+      })
+    });
 
   }
 
 
 
   ngOnInit(): void {
-     this.auth.getUserDetails();
+    this.auth.getUserDetails();
+  }
 
-    console.log("volunteer data", this.volunteerTaskList)
+  onDone(task) {
+    task.status = 'done';
+    this.dataservice.updateTaskStatus(task);
   }
 
 }
