@@ -63,14 +63,23 @@
             </div>
         </div>
         <div class="col-md-8 px-2 pt-4 pb-2">
-            <div class="card shadow-lg rounded ">
-                <ul class="p-0">
-                    <li class="row py-4 border-bottom" *ngFor="let volunteer of volunteerlist | async">
-                       <div class="col">name :{{volunteer.name}}</div> 
-                       <div class="col">ward :{{volunteer.ward}}</div> 
-                       <div class="col">phone :{{volunteer.phone}}</div> 
-                    </li>
-                </ul>
+            <div class="card shadow-lg rounded p-3">
+                <table *ngIf = "volunteerlist" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>ward</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of volunteerlist | async">
+                            <td>{{user.name}}</td>
+                            <td>{{user.phone}}</td>
+                            <td>{{user.ward}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

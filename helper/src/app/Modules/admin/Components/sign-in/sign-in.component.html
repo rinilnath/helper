@@ -16,9 +16,6 @@
                         <div *ngIf="processing" class="my-2 alert alert-primary">
                             {{this.processing}}
                         </div>
-                        <div *ngIf="error" class="my-2 alert alert-danger">
-                            {{this.error}}
-                        </div>
                         <div *ngIf="success" class="my-2 alert alert-success">
                             {{this.success}}
                         </div>
@@ -39,5 +36,21 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Email or Password is incorrect</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
