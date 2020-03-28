@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { UserRequest } from '../models/userRequest.model';
+import { VolunteerRequest } from '../models/volunteerRequest.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import "firebase/firestore"
 @Injectable({
   providedIn: 'root'
 })
-export class UserRequestsService {
+export class VolunteerRequestsService {
 
-  public userRequestFormData: UserRequest;
+  public volunteerRequestFormData: VolunteerRequest;
   
 
   constructor(public fire: AngularFirestore) {
@@ -15,11 +15,11 @@ export class UserRequestsService {
 
   addRequest(data: any) {
     console.log(data);
-    this.fire.collection("userRequest").add(data);
+    this.fire.collection("volunteerRequest").add(data);
   }
 
   getRequest() {
-    return this.fire.collection("userRequest").snapshotChanges();
+    return this.fire.collection("volunteerRequest").snapshotChanges();
   }
 
   get windowRef() {

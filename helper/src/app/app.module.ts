@@ -11,9 +11,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from "src/environments/environment";
 
 import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule} from '@angular/fire/firestore/';
+import { AngularFirestoreModule } from '@angular/fire/firestore/';
+
+//services
 import { UserRequestsService } from './Services/user-requests.service';
+import { VolunteerRequestsService } from './Services/volunteer-requests.service';
+
+//components
 import { UserComponent } from './Components/user/user.component';
+import { VolunteerComponent } from './Components/volunteer/volunteer.component';
+
+import { from } from 'rxjs';
 
 
 
@@ -21,7 +29,8 @@ import { UserComponent } from './Components/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    VolunteerComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +40,7 @@ import { UserComponent } from './Components/user/user.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [UserRequestsService],
+  providers: [UserRequestsService, VolunteerRequestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

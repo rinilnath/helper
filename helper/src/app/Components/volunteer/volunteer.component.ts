@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserRequestsService } from 'src/app/Services/user-requests.service';
-import { UserRequest } from 'src/app/models/userRequest.model';
+
+import { VolunteerRequestsService } from 'src/app/Services/volunteer-requests.service';
+import { VolunteerRequest } from 'src/app/models/volunteerRequest.model';
 import { districts } from '../../Services/geographyDetails'
 import { villages } from '../../Services/geographyDetails'
 import { taluks } from '../../Services/geographyDetails'
@@ -20,17 +21,17 @@ export class PhoneNumber {
 }
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-volunteer',
+  templateUrl: './volunteer.component.html',
+  styleUrls: ['./volunteer.component.css']
 })
-export class UserComponent implements OnInit {
+export class VolunteerComponent implements OnInit {
 
   trackingNumber: string;
 
   userDetails;
 
-  list: UserRequest[];
+  list: VolunteerRequest[];
 
   districtlist = districts;
   villagelist = villages;
@@ -41,13 +42,13 @@ export class UserComponent implements OnInit {
   verificationCode: string;
   user: any;
 
-  constructor(public userRequest: UserRequestsService) {
+  constructor(public volunteerRequest: VolunteerRequestsService) {
 
   }
 
 
   ngOnInit(): void {
-    this.windowRef = this.userRequest.windowRef;
+    this.windowRef = this.volunteerRequest.windowRef;
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
     this.windowRef.recaptchaVerifier.render();
     this.resetForm();
@@ -58,7 +59,7 @@ export class UserComponent implements OnInit {
 
     const appVerifier = this.windowRef.recaptchaVerifier;
 
-    this.phoneNumber.phoneNumber = this.userRequest.userRequestFormData.mobile;
+    this.phoneNumber.phoneNumber = this.volunteerRequest.volunteerRequestFormData.mobile;
 
     const num = this.phoneNumber.e164;
 
@@ -97,11 +98,11 @@ export class UserComponent implements OnInit {
   }
 
   getRequest() {
-    this.userRequest.getRequest().subscribe(actionArray => {
+    this.volunteerRequest.getRequest().subscribe(actionArray => {
       this.list = actionArray.map(item => {
         return {
           id: item.payload.doc.id,
-          ... (item.payload.doc.data()) as UserRequest
+          ... (item.payload.doc.data()) as VolunteerRequest
         }
       })
     });
@@ -125,7 +126,7 @@ export class UserComponent implements OnInit {
         } else {
           data.status = "submitted";
           console.log(data);
-          this.userRequest.addRequest(data);
+          this.volunteerRequest.addRequest(data);
           $('.modal-body').html("<p>Your request submitted successfully</p><p>We will contact you soon</p>");
           $('#myModal').modal('show');
           this.resetForm(form);
@@ -139,16 +140,18 @@ export class UserComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form != null)
       form.resetForm();
-    this.userRequest.userRequestFormData = {
+    this.volunteerRequest.volunteerRequestFormData = {
+      category: "",
       username: "",
-      email: "",
       mobile: "",
+      email: "",
+      dob: "",
       district: "",
       taluk: "",
       village: "",
       address: "",
-      requiredItem: "",
-      status: ""
+      qualification: "",
+      ocupation: ""
     }
   }
 }
