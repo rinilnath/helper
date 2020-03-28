@@ -15,11 +15,11 @@ export class VolunteerRequestsService {
 
   addRequest(data: any) {
     console.log(data);
-    this.fire.collection("volunteerRequest").add(data);
+    this.fire.collection("volunteer").add(data);
   }
 
   getRequest() {
-    return this.fire.collection("volunteerRequest").snapshotChanges();
+    return this.fire.collection("volunteer").snapshotChanges();
   }
 
   get windowRef() {

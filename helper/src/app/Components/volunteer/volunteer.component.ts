@@ -29,7 +29,7 @@ export class VolunteerComponent implements OnInit {
 
   trackingNumber: string;
 
-  userDetails;
+  volunteerDetails;
 
   list: VolunteerRequest[];
 
@@ -85,16 +85,13 @@ export class VolunteerComponent implements OnInit {
       .catch(error => alert("Incorrect code entered?"));
   }
 
-  onSubmitNumber() {
-    let num = this.trackingNumber;
+  async onSubmitVolunteerList() {
     let userdet = [];
-    this.getRequest();
+    await this.getRequest();
     this.list.forEach(function (value) {
-      if (num == value.mobile) {
         userdet.push(value);
-      }
     });
-    this.userDetails = userdet;
+    this.volunteerDetails = userdet;
   }
 
   getRequest() {
@@ -127,7 +124,7 @@ export class VolunteerComponent implements OnInit {
           data.status = "submitted";
           console.log(data);
           this.volunteerRequest.addRequest(data);
-          $('.modal-body').html("<p>Your request submitted successfully</p><p>We will contact you soon</p>");
+          $('.modal-body').html("<p>Thankyou for your involvement</p><p>We will contact you soon</p>");
           $('#myModal').modal('show');
           this.resetForm(form);
         }
@@ -150,8 +147,8 @@ export class VolunteerComponent implements OnInit {
       taluk: "",
       village: "",
       address: "",
-      qualification: "",
-      ocupation: ""
+      ocupation: "",
+      ward: null
     }
   }
 }

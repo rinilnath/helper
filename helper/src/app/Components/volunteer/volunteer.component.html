@@ -5,15 +5,15 @@
     <form #form="ngForm" autocomplete="off">
 
         <div class="form-group">
-            <label for="requireditem">Category:</label>
-            <select class="form-control" id="requireditem" #requireditem="ngModel" name="requireditem"
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" #category="ngModel" name="category"
                 [(ngModel)]="volunteerRequest.volunteerRequestFormData.category" required>
                 <option value="doctor">Docter</option>
                 <option value="organisation">Organisation</option>
                 <option value="healthStaff">Other Health Staff</option>
                 <option value="public">Public</option>
             </select>
-            <div *ngIf="requireditem.invalid && requireditem.touched" class="alert alert-danger mt-2">
+            <div *ngIf="category.invalid && category.touched" class="alert alert-danger mt-2">
                 This Field is required
             </div>
         </div>
@@ -99,44 +99,73 @@
                     This Field is required
                 </div>
             </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="username">Ward:</label>
+                    <input type="number" class="form-control" placeholder="Enter your ward number" id="ward"
+                        #ward="ngModel" name="ward" [(ngModel)]="volunteerRequest.volunteerRequestFormData.ward"
+                        required>
+                    <div *ngIf="ward.invalid && ward.touched" class="alert alert-danger mt-2">
+                        This Field is required
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="form-group">
             <label for="address">Address:</label>
             <input type="text" class="form-control" placeholder="House name and location" id="address"
-                #address="ngModel" name="address" [(ngModel)]="volunteerRequest.volunteerRequestFormData.address" required>
+                #address="ngModel" name="address" [(ngModel)]="volunteerRequest.volunteerRequestFormData.address"
+                required>
             <div *ngIf="address.invalid && address.touched" class="alert alert-danger mt-2">
                 This Field is required
             </div>
         </div>
-       
+
+        <div class="form-group">
+            <label for="dob">DOB:</label>
+            <input type="text" class="form-control" placeholder="Date of birth" id="dob" #dob="ngModel" name="dob"
+                [(ngModel)]="volunteerRequest.volunteerRequestFormData.dob" required>
+            <div *ngIf="dob.invalid && dob.touched" class="alert alert-danger mt-2">
+                This Field is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ocupation">Ocupation:</label>
+            <input type="text" class="form-control" placeholder="Enter your ocupation" id="ocupation"
+                #ocupation="ngModel" name="ocupation" [(ngModel)]="volunteerRequest.volunteerRequestFormData.ocupation"
+                required>
+            <div *ngIf="ocupation.invalid && ocupation.touched" class="alert alert-danger mt-2">
+                This Field is required
+            </div>
+        </div>
+
 
         <button type="submit" (click)="onSubmit(form)" [disabled]="form.invalid" class="btn btn-success">Submit</button>
     </form>
     <div class="my-4">
-        <h4>
-            Track Your Request
-        </h4>
         <form>
             <div class="form-group">
-                <label for="moible">Provide Your Mobile Number:</label>
-                <input type="text" [(ngModel)]="trackingNumber" name="trackingNumber" class="form-control"
-                    placeholder="Enter your Mobile Number" id="mobile">
-                <button (click)="onSubmitNumber()" class="btn btn-primary mt-2">Submit</button>
+                <button (click)="onSubmitVolunteerList()" class="btn btn-primary mt-2">Click here to see volunteer list</button>
             </div>
         </form>
-        <table *ngIf = "userDetails" class="table table-bordered mt-3">
+        <table *ngIf="volunteerDetails" class="table table-bordered mt-3">
             <thead>
                 <tr>
+                    <th>Category</th>
                     <th>Name</th>
                     <th>Mobile</th>
-                    <th>Status</th>
+                    <th>District</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userDetails">
-                    <td>{{user.username}}</td>
-                    <td>{{user.mobile}}</td>
-                    <td>{{user.status}}</td>
+                <tr *ngFor="let volunteer of volunteerDetails">
+                    <td>{{volunteer.category}}</td>
+                    <td>{{volunteer.username}}</td>
+                    <td>{{volunteer.mobile}}</td>
+                    <td>{{volunteer.district}}</td>
                 </tr>
             </tbody>
         </table>

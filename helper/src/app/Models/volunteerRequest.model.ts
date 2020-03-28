@@ -9,8 +9,6 @@ export class VolunteerRequest {
 
     category: String;
     dob: String;
-    qualification: String;
     ocupation: String;
-
-
+    ward: Number;
 }
