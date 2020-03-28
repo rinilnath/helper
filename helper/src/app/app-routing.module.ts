@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { AddRequestComponent } from './Components/add-request/add-request.component';
+import { UserComponent } from './Components/user/user.component';
 
 
 const routes: Routes = [
-//  { path: '', component: AddRequestComponent }
-];
+ { path: 'user', component: UserComponent },
+ { path:'admin' ,  loadChildren: () => import('./Modules/admin/admin.module').then(m => m.AdminModule)},
+ {path:'',redirectTo:'user',pathMatch:"full"}
+]
+;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

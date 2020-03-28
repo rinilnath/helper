@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background:#F5F6FA;
+}
+.logo{
+    font-weight: 700;
+    font-size:1.25rem;
+}
+.card-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom:15px;
+}

@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4  px-2 pt-4 pb-2">
+            <div class="card shadow-lg rounded">
+
+                <div class="card-body">
+                    <h1 class="card-title">Add Volunteer</h1>
+                    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+                        <div *ngIf="processing" class="my-2 alert alert-primary">
+                            {{this.processing}}
+                        </div>
+                        <div *ngIf="error" class="my-2 alert alert-danger">
+                            {{this.error}}
+                        </div>
+                        <div *ngIf="success" class="my-2 alert alert-success">
+                            {{this.success}}
+                        </div>
+
+                        <div *ngIf="volunteerForm.controls['name'].invalid && (volunteerForm.controls['name'].dirty || volunteerForm.controls['name'].touched)"
+                            class="my-2 alert alert-danger">
+                            Name is required
+                        </div>
+                        <label>Name</label>
+                        <input type="text" formControlName="name" id="" class="my-2 form-control">
+
+
+                        <div *ngIf="volunteerForm.controls['phone'].invalid && (volunteerForm.controls['phone'].dirty || volunteerForm.controls['phone'].touched)"
+                            class="my-2 alert alert-danger">
+                            Please enter valid phone number
+                        </div>
+                        <label>Phone</label>
+                        <input type="text" formControlName="phone" id="" class="my-2 form-control">
+
+                        <div *ngIf="volunteerForm.controls['ward'].invalid && (volunteerForm.controls['ward'].dirty || volunteerForm.controls['ward'].touched)"
+                            class="my-2 alert alert-danger">
+                            Please enter valid ward number
+                        </div>
+                        <label>ward</label>
+                        <input type="number" formControlName="ward" id="" class="my-2 form-control">
+
+                        <div *ngIf="volunteerForm.controls['email'].invalid && (volunteerForm.controls['email'].dirty || volunteerForm.controls['email'].touched)"
+                            class="my-2 alert alert-danger">
+                            Please enter valid email id
+                        </div>
+                        <label>Email</label>
+                        <input type="email" formControlName="email" id="" class="my-2 form-control">
+                        <div *ngIf="volunteerForm.controls['password'].invalid && (volunteerForm.controls['password'].dirty || volunteerForm.controls['password'].touched)"
+                            class="my-2 alert alert-danger">
+                            Passwords should be atleast 8 charecters in length
+                        </div>
+                        <label>Password</label>
+                        <input type="password" formControlName="password" id="" class="my-2 form-control">
+                        <div *ngIf="(volunteerForm.controls['rpassword'].invalid && (volunteerForm.controls['rpassword'].dirty || volunteerForm.controls['rpassword'].touched))|| (volunteerForm.controls['rpassword'].value!=volunteerForm.controls['password'].value)"
+                            class="my-2 alert alert-danger">
+                            Passwords dont match
+                        </div>
+                        <label>Password</label>
+                        <input type="password" formControlName="rpassword" id="" class="my-2 form-control">
+                        <button class="my-2 btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 px-2 pt-4 pb-2">
+            <div class="card shadow-lg rounded ">
+                <ul class="p-0">
+                    <li class="row py-4 border-bottom" *ngFor="let volunteer of volunteerlist | async">
+                       <div class="col">name :{{volunteer.name}}</div> 
+                       <div class="col">ward :{{volunteer.ward}}</div> 
+                       <div class="col">phone :{{volunteer.phone}}</div> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
