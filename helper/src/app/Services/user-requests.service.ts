@@ -18,8 +18,12 @@ export class UserRequestsService {
     this.fire.collection("userRequest").add(data);
   }
 
-  getRequest() {
-    return this.fire.collection("userRequest").snapshotChanges();
+  getRequest(mobile) {
+    return this.fire.collection("userRequest",ref=>ref.where('mobile','==',mobile));
+  }
+
+  getLocalBodies() {
+    return this.fire.collection("localbodies");
   }
 
   get windowRef() {

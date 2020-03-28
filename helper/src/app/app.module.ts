@@ -14,6 +14,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule} from '@angular/fire/firestore/';
 import { UserRequestsService } from './Services/user-requests.service';
 import { UserComponent } from './Components/user/user.component';
+import { NavbarComponent } from './Components/user/navbar/navbar.component';
 
 
 
@@ -21,7 +22,8 @@ import { UserComponent } from './Components/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
