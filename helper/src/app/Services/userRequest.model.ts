@@ -7,4 +7,5 @@ export class UserRequest {
     village: string;
     address: string;
     requiredItem: string;
+    status: string;
 }

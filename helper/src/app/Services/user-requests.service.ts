@@ -21,4 +21,8 @@ export class UserRequestsService {
   getRequest() {
     return this.fire.collection("userRequest").snapshotChanges();
   }
+
+  get windowRef() {
+    return window;
+  }
 }
