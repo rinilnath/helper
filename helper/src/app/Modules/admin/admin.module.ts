@@ -12,22 +12,23 @@ import { AuthService } from './Services/auth.service';
 import { DataService } from './Services/data.service';
 import { AddVolunteersComponent } from './Components/add-volunteers/add-volunteers.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { VolunteersDashboardComponent } from './Components/volunteers-dashboard/volunteers-dashboard.component';
 
 
 
 @NgModule({
-  declarations: [RegisterComponent, DashboardComponent, SignInComponent, AddVolunteersComponent, NavbarComponent],
+  declarations: [RegisterComponent, DashboardComponent, SignInComponent, AddVolunteersComponent, NavbarComponent, VolunteersDashboardComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
-  providers:[
+  providers: [
     AuthService,
     DataService
   ],
-  exports:[
+  exports: [
     AppRoutingModule
   ]
 })

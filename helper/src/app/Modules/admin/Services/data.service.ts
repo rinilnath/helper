@@ -19,4 +19,7 @@ export class DataService {
   getVolunteers(district,localbody){
     return this.fire.collection("volunteers",ref=>ref.where('district','==',district).where('localbody','==',localbody))
   }
+  getAllVolunteers(district,localbody){
+    return this.fire.collection("volunteers",ref=>ref.where('district','==',district).where('localbody','==',localbody));
+  }
 }

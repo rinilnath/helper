@@ -5,6 +5,7 @@ import { SignInComponent } from './Components/sign-in/sign-in.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AddVolunteersComponent } from './Components/add-volunteers/add-volunteers.component';
+import { VolunteersDashboardComponent } from './Components/volunteers-dashboard/volunteers-dashboard.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/login']);
@@ -12,9 +13,10 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/login']
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: SignInComponent  },
-  { path: 'dash', component: DashboardComponent , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  {path:'addvolunteer',component:AddVolunteersComponent },
+  { path: 'login', component: SignInComponent },
+  { path: 'dash', component: DashboardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'addvolunteer', component: AddVolunteersComponent },
+  { path: 'volunteer', component: VolunteersDashboardComponent },
   { path: '', redirectTo: 'dash', pathMatch: "full" }
 ];
 

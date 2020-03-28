@@ -18,4 +18,10 @@ export class AuthService {
   getUser(){
     this.auth.user.subscribe(data=>console.log(data.uid))
   }
+  getUserDetails() {
+    this.auth.user.subscribe(data=> {
+      localStorage.setItem("userId",data.uid)
+      //return data;
+    });
+  }
 }

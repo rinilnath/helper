@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4  px-2 pt-4 pb-2">
+            <div class="card shadow-lg rounded">
+
+                <div class="card-body">
+                    <h1 class="card-title">Add Volunteer</h1>
+
+                    <div class="col-md-8 px-2 pt-4 pb-2">
+                        <div class="card shadow-lg rounded ">
+                            <ul class="p-0">
+                                <li class="row py-4 border-bottom" *ngFor="let volunteer of volunteerlist | async">
+                                   <div class="col">name :{{volunteer.name}}</div> 
+                                   <div class="col">ward :{{volunteer.ward}}</div> 
+                                   <div class="col">phone :{{volunteer.phone}}</div> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
