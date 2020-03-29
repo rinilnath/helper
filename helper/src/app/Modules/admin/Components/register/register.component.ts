@@ -4,12 +4,14 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { DataService } from '../../Services/data.service';
+import { districts } from '../../../user/Services/geographyDetails'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  district = districts;
   success = '';
   error = ''
   processing =''

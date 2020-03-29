@@ -17,6 +17,7 @@ export class AddVolunteersComponent implements OnInit {
     ward: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
+    specialisation: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     rpassword: new FormControl('', [Validators.required]),
     district: new FormControl(''),

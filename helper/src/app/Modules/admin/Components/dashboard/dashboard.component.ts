@@ -58,17 +58,27 @@ export class DashboardComponent implements OnInit {
   }
 
   assignVolunteer(volunteer: Volunteer) {
+    if(!this.currentRequest.volunteerId){
     this.currentRequest.volunteerId = volunteer.id;
+    this.currentRequest.status = "Volunteer Assigned"
     volunteer.requestId = this.currentRequest.id;
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
+    } else {
+      alert("already assigned a volunteer")
+    }
   }
 
   removeVolunteer(volunteer: Volunteer) {
+    if(this.currentRequest.volunteerId == volunteer.id) {
     this.currentRequest.volunteerId = null;
     volunteer.requestId = null;
+    this.currentRequest.status = "submitted";
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
+    } else {
+      alert("Wrong Request")
+    }
   }
 
   signout() {

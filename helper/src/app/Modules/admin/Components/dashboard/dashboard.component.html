@@ -2,31 +2,50 @@
 <div class="container py-4">
     <h4>District : {{district}}</h4>
     <h4>Local Body : {{localbody}}</h4>
-    <table *ngIf="requestDetails" class="table table-bordered my-3" style="text-align: center;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Address</th>
-                <th>Required Item</th>
-                <th>Volunteer</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of requestDetails">
-                <td>{{user.username}}</td>
-                <td>{{user.mobile}}</td>
-                <td>{{user.address}}</td>
-                <td>{{user.requireditem}}</td>
-                <td>{{user.volunteerId}}</td>
-                <td>{{user.status}}
-                    <button (click)='updateRequest(user)' class="btn btn-primary mx-3"><i
+    <div class="row">
+        <div *ngFor="let user of requestDetails" style="width:400px" [ngClass]="{'bg-warning': user.volunteerId}"
+            class="card shadow-lg col-lg-4 m-2">
+            <div class="card-body">
+                <div class="card-title row">
+                    <h4 class="col">{{user.username}}</h4>
+                    <button (click)="updateRequest(user)" class="btn btn-primary mx-3 col"><i
                             class="fa fa-edit"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </div>
+                <table class="table table-responsive">
+                    <!-- <thead>
+                      <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead> -->
+                    <tbody>
+                        <tr>
+                            <td>Mobile </td>
+                            <td> {{user.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address </td>
+                            <td> {{user.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Item </td>
+                            <td> {{user.requireditem}}</td>
+                        </tr>
+                        <tr>
+                            <td>Volunteer </td>
+                            <td> {{user.volunteerId}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status </td>
+                            <td> {{user.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- The Modal -->
@@ -42,23 +61,43 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <table *ngIf="volunteers" class="table table-bordered my-3" style="text-align: center;">
+                <table *ngIf="volunteers" class="table table-responsive table-bordered" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Mobile</th>
-                            <th>Request<br>Assigned</th>
+                            <th>Specialisation</th>
+                            <th>Request Assigned</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let user of volunteers">
-                            <td>{{user.name}}</td>
-                            <td>{{user.phone}}</td>
-                            <td>{{user.requestId}}</td>
-                            <td *ngIf = "!user.requestId" ><button (click)='assignVolunteer(user)' class="btn btn-primary">Assign</button></td>
-                            <td *ngIf = "user.requestId" ><button (click)='removeVolunteer(user)' class="btn btn-danger">Remove</button></td>
-                        </tr>
+                    <tbody *ngIf="currentRequest.volunteerId">
+                        <ng-container *ngFor="let user of volunteers">
+                            <tr *ngIf="currentRequest.volunteerId == user.id">
+                                <td>{{user.name}}</td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.specialisation}}</td>
+                                <td>{{user.requestId}}</td>
+                                <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
+                                        class="btn btn-primary">Assign</button></td>
+                                <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'
+                                        class="btn btn-danger">Remove</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                    <tbody *ngIf="!currentRequest.volunteerId">
+                        <ng-container *ngFor="let user of volunteers">
+                            <tr *ngIf="!user.requestId">
+                                <td>{{user.name}}</td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.specialisation}}</td>
+                                <td>{{user.requestId}}</td>
+                                <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
+                                        class="btn btn-primary">Assign</button></td>
+                                <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'
+                                        class="btn btn-danger">Remove</button></td>
+                            </tr>
+                        </ng-container>
                     </tbody>
                 </table>
             </div>

@@ -35,6 +35,17 @@
                         </div>
                         <label>Email</label>
                         <input type="email" formControlName="email" id="" class="my-2 form-control">
+
+                        <div *ngIf="volunteerForm.controls['specialisation'].invalid && (volunteerForm.controls['specialisation'].dirty || volunteerForm.controls['specialisation'].touched)"
+                            class="my-2 alert alert-danger">
+                            Please enter valid email id
+                        </div>
+                        <label>specialisation</label>
+                        <select formControlName="specialisation" id="" class="my-2 form-control">
+                            <option value="Food Delivery"> Food Delivery </option>
+                            <option value="Doctor"> Doctor </option>
+                        </select>
+
                         <div *ngIf="volunteerForm.controls['password'].invalid && (volunteerForm.controls['password'].dirty || volunteerForm.controls['password'].touched)"
                             class="my-2 alert alert-danger">
                             Passwords should be atleast 8 charecters in length
@@ -54,19 +65,24 @@
         </div>
         <div class="col-md-8 px-2 pt-4 pb-2">
             <div class="card shadow-lg rounded p-3">
-                <table *ngIf = "volunteerlist" class="table table-bordered">
+                <table *ngIf = "volunteerlist" class="table table-bordered" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>ward</th>
+                            <th>Specialisation</th>
+                            <th>Request Assigned</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of volunteerlist | async">
+                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-warning': user.requestId}">
                             <td>{{user.name}}</td>
                             <td>{{user.phone}}</td>
                             <td>{{user.ward}}</td>
+                            <td>{{user.specialisation}}</td>
+                            <td *ngIf = "user.requestId">yes</td>
+                            <td *ngIf = "!user.requestId">No</td>
                         </tr>
                     </tbody>
                 </table>
