@@ -52,6 +52,7 @@ export class VolunteersDashboardComponent implements OnInit {
   }
   onNotDone(task) {
     task.status = 'Not Done';
+    task.volunteerId = '';
     this.dataservice.updateTaskStatus(task);
   }
 
