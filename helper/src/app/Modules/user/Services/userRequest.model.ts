@@ -9,4 +9,5 @@ export class UserRequest {
     address: string;
     requiredItem: string;
     status: string;
+    volunteerId: string;
 }

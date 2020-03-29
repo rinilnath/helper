@@ -21,6 +21,10 @@ export class DataService {
   getVolunteers(district, localbody) {
     return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody))
   }
+
+  getRequest(district, localbody) {
+    return this.fire.collection("userRequest", ref => ref.where('district', '==', district).where('taluk', '==', localbody))
+  }
   
   getAllVolunteers(district, localbody) {
     return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody));
@@ -37,4 +41,13 @@ export class DataService {
   updateTaskStatus(data) {
     return this.fire.collection("userRequest").doc(data.id).set(data)
   }
+
+  updateVolunteerInUser(data) {
+    return this.fire.collection("userRequest").doc(data.id).set(data)
+  }
+
+  updateUserInVolunteer(data) {
+    return this.fire.collection("volunteers").doc(data.id).set(data)
+  }
+
 }

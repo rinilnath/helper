@@ -30,8 +30,8 @@ export class RegisterComponent implements OnInit {
       this.authservice.register(this.registrationForm.value.email, this.registrationForm.value.password)
         .then(async data => {
           this.dataservice.addLocalBody(data.user.uid, {
-            name: this.registrationForm.value.name,
-            district: this.registrationForm.value.district
+            name: this.registrationForm.value.name.toLowerCase(),
+            district: this.registrationForm.value.district.toLowerCase()
           }).then(async data => {
             console.log(data)
             this.processing=''

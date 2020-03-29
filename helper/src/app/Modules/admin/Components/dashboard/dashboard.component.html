@@ -1,1 +1,73 @@
 <app-navbar></app-navbar>
+<div class="container py-4">
+    <h4>District : {{district}}</h4>
+    <h4>Local Body : {{localbody}}</h4>
+    <table *ngIf="requestDetails" class="table table-bordered my-3" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>Required Item</th>
+                <th>Volunteer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of requestDetails">
+                <td>{{user.username}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.requireditem}}</td>
+                <td>{{user.volunteerId}}</td>
+                <td>{{user.status}}
+                    <button (click)='updateRequest(user)' class="btn btn-primary mx-3"><i
+                            class="fa fa-edit"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Assign Volunteer</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table *ngIf="volunteers" class="table table-bordered my-3" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Request<br>Assigned</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of volunteers">
+                            <td>{{user.name}}</td>
+                            <td>{{user.phone}}</td>
+                            <td>{{user.requestId}}</td>
+                            <td *ngIf = "!user.requestId" ><button (click)='assignVolunteer(user)' class="btn btn-primary">Assign</button></td>
+                            <td *ngIf = "user.requestId" ><button (click)='removeVolunteer(user)' class="btn btn-danger">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

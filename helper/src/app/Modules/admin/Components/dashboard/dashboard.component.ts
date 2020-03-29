@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../Services/data.service';
+import { Observable } from 'rxjs';
+import { Volunteer } from '../../Services/volunteer.model';
+import { UserRequest } from 'src/app/Modules/user/Services/userRequest.model';
+
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +15,62 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  requestDetails: UserRequest[];
+  volunteers: Volunteer[];
+  district: string;
+  localbody: string;
+  currentRequest: UserRequest;
+
+
+
+  constructor(private auth: AuthService,
+    private router: Router,
+    private dataSevice: DataService
+  ) { }
 
   ngOnInit(): void {
-    this.auth.getUser()
+    this.auth.getUser();
+    this.district = localStorage.getItem("District")
+    this.localbody = localStorage.getItem("LocalBody")
+    this.dataSevice.getRequest(this.district.toLowerCase(), this.localbody.toLowerCase()).snapshotChanges().
+      subscribe(data => {
+        this.requestDetails = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data() as UserRequest
+          };
+        })
+      })
+
+    this.dataSevice.getVolunteers(this.district, this.localbody).snapshotChanges().subscribe(data => {
+      this.volunteers = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as Volunteer
+        };
+      })
+    })
   }
+
+  updateRequest(user) {
+    this.currentRequest = user;
+    $('#myModal').modal('show');
+  }
+
+  assignVolunteer(volunteer: Volunteer) {
+    this.currentRequest.volunteerId = volunteer.id;
+    volunteer.requestId = this.currentRequest.id;
+    this.dataSevice.updateVolunteerInUser(this.currentRequest);
+    this.dataSevice.updateUserInVolunteer(volunteer);
+  }
+
+  removeVolunteer(volunteer: Volunteer) {
+    this.currentRequest.volunteerId = null;
+    volunteer.requestId = null;
+    this.dataSevice.updateVolunteerInUser(this.currentRequest);
+    this.dataSevice.updateUserInVolunteer(volunteer);
+  }
+
   signout() {
     this.auth.signout()
       .then(data => {

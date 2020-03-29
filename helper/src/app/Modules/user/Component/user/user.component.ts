@@ -137,7 +137,8 @@ export class UserComponent implements OnInit {
       village: "",
       address: "",
       requiredItem: "",
-      status: ""
+      status: "",
+      volunteerId: ""
     }
   }
 }
