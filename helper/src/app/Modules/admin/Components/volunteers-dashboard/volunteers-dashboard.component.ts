@@ -37,7 +37,21 @@ export class VolunteersDashboardComponent implements OnInit {
   }
 
   onDone(task) {
-    task.status = 'done';
+    task.status = 'Done';
+    this.dataservice.updateTaskStatus(task);
+  }
+
+  onAccept(task) {
+    task.status = 'Confirmed';
+    this.dataservice.updateTaskStatus(task);
+  }
+  onRejected(task) {
+    task.status = 'Rejected';
+    task.volunteerId = '';
+    this.dataservice.updateTaskStatus(task);
+  }
+  onNotDone(task) {
+    task.status = 'Not Done';
     this.dataservice.updateTaskStatus(task);
   }
 
