@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
-<div class="container py-4">
+<div class="container-fluid py-4">
     <h4>District : {{district}}</h4>
     <h4>Local Body : {{localbody}}</h4>
-    <div class="row">
-        <div *ngFor="let user of requestDetails" style="width:400px" [ngClass]="{'bg-warning': user.volunteerId}"
-            class="card shadow-lg col-lg-4 m-2">
+    <div class="row" style="justify-content: center;">
+        <div *ngFor="let user of requestDetails" [ngClass]="{'bg-warning': user.volunteerId}"
+            class="card shadow-lg col-lg-3 col-md-4 m-2">
             <div class="card-body">
-                <div class="card-title row">
-                    <h4 class="col">{{user.username}}</h4>
-                    <button (click)="updateRequest(user)" class="btn btn-primary mx-3 col"><i
+                <div class="card-title d-flex">
+                    <h4>{{user.username}}</h4>
+                    <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
                             class="fa fa-edit"></i></button>
                 </div>
                 <table class="table table-responsive">

@@ -14,7 +14,6 @@ export class UserRequestsService {
   }
 
   addRequest(data: any) {
-    console.log(data);
     this.fire.collection("userRequest").add(data);
   }
 
