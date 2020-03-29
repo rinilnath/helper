@@ -7,16 +7,6 @@
                 <div class="card-body">
                     <h1 class="card-title">Add Volunteer</h1>
                     <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
-                        <div *ngIf="processing" class="my-2 alert alert-primary">
-                            {{this.processing}}
-                        </div>
-                        <div *ngIf="error" class="my-2 alert alert-danger">
-                            {{this.error}}
-                        </div>
-                        <div *ngIf="success" class="my-2 alert alert-success">
-                            {{this.success}}
-                        </div>
-
                         <div *ngIf="volunteerForm.controls['name'].invalid && (volunteerForm.controls['name'].dirty || volunteerForm.controls['name'].touched)"
                             class="my-2 alert alert-danger">
                             Name is required

@@ -11,61 +11,35 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-volunteers.component.css']
 })
 export class AddVolunteersComponent implements OnInit {
-  error = ''
-  success = ''
-  processing = ''
-
-  volunteerlist:Observable<any[]>
+  volunteerlist: Observable<any[]>
   volunteerForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     ward: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    rpassword: new FormControl('', [Validators.required])
+    rpassword: new FormControl('', [Validators.required]),
+    district: new FormControl(''),
+    localbody: new FormControl('')
+
   })
   constructor(public authservice: AuthService,
     public dataservice: DataService,
-    private router:Router) {
-      this.volunteerlist=this.dataservice.getVolunteers(localStorage.getItem("District"),localStorage.getItem("LocalBody")).valueChanges()
-     }
+    private router: Router) {
+    this.volunteerlist = this.dataservice.getVolunteers(localStorage.getItem("District"), localStorage.getItem("LocalBody")).valueChanges()
+  }
 
   ngOnInit(): void {
     console.log(this.volunteerlist)
   }
-  onSubmit() {
-    this.error = '',
-    this.success = ''
-    this.processing = ''
+  onSubmit() {    
+    this.volunteerForm.value.district = localStorage.getItem("District")
+    this.volunteerForm.value.localbody = localStorage.getItem("LocalBody")
     if (!this.volunteerForm.invalid) {
-      this.processing = 'Processing request . Please wait ..'
-      this.authservice.register(this.volunteerForm.value.email, this.volunteerForm.value.password)
-        .then(async data => {
-          const {name,ward,phone,email}=this.volunteerForm.value
-          const district=localStorage.getItem("District"),
-          localbody=localStorage.getItem("LocalBody")
-          this.dataservice.addVolunteer(data.user.uid, {
-            name,
-            ward,
-            phone,
-            email,
-            localbody,
-            district
-          }).then(async data => {
-            console.log(data)
-            this.processing = ''
-            this.success = "Added new volunteer"
-            this.volunteerForm.reset()
-          })
-            .catch(data => console.log(data))
-
-        }).catch(data => {
-          this.error = data.message
-        })
+      this.dataservice.addVolunteer(this.volunteerForm.value)
     }
     else {
-      this.error = "All fields are required";
-      console.log(this.error)
+      alert("invalid input")
     }
   }
 

@@ -13,22 +13,28 @@ export class DataService {
   getUserData(uid) {
     return this.fire.collection("localbodies").doc(uid).get()
   }
-  addVolunteer(uid, data) {
-    return this.fire.collection("volunteers").doc(uid).set(data)
+
+  addVolunteer(data) {
+    return this.fire.collection("volunteers").add(data)
   }
+
   getVolunteers(district, localbody) {
     return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody))
   }
+  
   getAllVolunteers(district, localbody) {
     return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody));
   }
+
   getVolunteerTaskList(uid) {
     return this.fire.collection("userRequest", ref => ref.where('volunteerId', '==', uid)).snapshotChanges()
   }
+
   getVolunteer(uid) {
     return this.fire.collection("volunteers").doc(uid)
   }
-  updateTaskStatus( data) {
+
+  updateTaskStatus(data) {
     return this.fire.collection("userRequest").doc(data.id).set(data)
   }
 }

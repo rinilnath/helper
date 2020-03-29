@@ -23,6 +23,7 @@ import { VolunteersDashboardComponent } from './Components/volunteers-dashboard/
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService,

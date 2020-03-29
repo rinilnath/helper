@@ -12,10 +12,10 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['admin/login']
 
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
   { path: 'login', component: SignInComponent },
   { path: 'dash', component: DashboardComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  { path: 'addvolunteer', component: AddVolunteersComponent },
+  { path: 'addvolunteer', component: AddVolunteersComponent,canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'volunteer', component: VolunteersDashboardComponent },
   { path: '', redirectTo: 'dash', pathMatch: "full" }
 ];
