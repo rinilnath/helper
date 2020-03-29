@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserRequestsService } from 'src/app/Services/user-requests.service';
+import { UserRequestsService } from '../../Services/user-requests.service';
 
 import * as firebase from 'firebase'
-import { JsonPipe } from '@angular/common';
-import { stringify } from 'querystring';
+
 declare var $: any;
 
 export class PhoneNumber {

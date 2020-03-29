@@ -3,7 +3,7 @@ import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../Services/data.service';
 import { Observable } from 'rxjs';
-import { UserRequest } from 'src/app/Services/userRequest.model';
+import { UserRequest } from '../../../user/Services/userRequest.model';
 
 
 @Component({

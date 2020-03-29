@@ -3,37 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
-
-import { environment } from "src/environments/environment";
-
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule} from '@angular/fire/firestore/';
-import { UserRequestsService } from './Services/user-requests.service';
-import { UserComponent } from './Components/user/user.component';
-import { NavbarComponent } from './Components/user/navbar/navbar.component';
-
-
-
+import { UserModule } from './Modules/user/user.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    ReactiveFormsModule,
-    FormsModule
+    UserModule,
   ],
-  providers: [UserRequestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
