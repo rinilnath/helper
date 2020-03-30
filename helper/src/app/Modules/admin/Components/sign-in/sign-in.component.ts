@@ -14,7 +14,6 @@ export class SignInComponent implements OnInit {
   success = '';
   error = ''
   processing = ''
-  hey = "hello"
   signinForm = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,4 +51,27 @@ export class SignInComponent implements OnInit {
     }
   }
 
+  volunteerLogin() {
+    let flag = true;
+    let req;
+    let auth = this.authservice;
+    let rou = this.router;
+    this.dataservice.getVolunteerForLogin(this.signinForm.value.email, this.signinForm.value.password).valueChanges().
+      subscribe(res => {
+        req = res;
+        req.forEach(function (values) {
+          localStorage.setItem("userId", "vol-" + values.phone)
+          flag = false;
+          auth.login()
+        });
+        if (flag) {
+          $('.modal-body').html("<p>User not exist with this details</p><p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
+          $('#myModal').modal('show');
+        }
+      });
+    if (auth.volunteerisLoggedIn) {
+      const redirectUrl = 'admin/volunteer';
+      rou.navigate([redirectUrl]);
+    }
+  }
 }

@@ -16,14 +16,13 @@ export class AddVolunteersComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     ward: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
     specialisation: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    rpassword: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     district: new FormControl(''),
     localbody: new FormControl('')
 
   })
+
   constructor(public authservice: AuthService,
     public dataservice: DataService,
     private router: Router) {
@@ -36,12 +35,12 @@ export class AddVolunteersComponent implements OnInit {
   onSubmit() {    
     this.volunteerForm.value.district = localStorage.getItem("District")
     this.volunteerForm.value.localbody = localStorage.getItem("LocalBody")
+    this.volunteerForm.value.password = "password1234"
     if (!this.volunteerForm.invalid) {
-      this.dataservice.addVolunteer(this.volunteerForm.value)
+      this.dataservice.addVolunteer(this.volunteerForm.value.phone ,this.volunteerForm.value)
     }
     else {
       alert("invalid input")
     }
   }
-
 }

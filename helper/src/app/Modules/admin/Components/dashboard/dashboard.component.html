@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td>Volunteer </td>
-                            <td> {{user.volunteerId}}</td>
+                            <td> {{user.volunteerId | valreplacing}}</td>
                         </tr>
                         <tr>
                             <td>Status </td>
@@ -71,13 +71,13 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="currentRequest.volunteerId">
+                    <tbody *ngIf="currentRequest && currentRequest.volunteerId">
                         <ng-container *ngFor="let user of volunteers">
                             <tr *ngIf="currentRequest.volunteerId == user.id">
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
-                                <td>{{user.requestId}}</td>
+                                <td>{{user.requestId | valreplacing}}</td>
                                 <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
                                         class="btn btn-primary">Assign</button></td>
                                 <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'
@@ -85,13 +85,13 @@
                             </tr>
                         </ng-container>
                     </tbody>
-                    <tbody *ngIf="!currentRequest.volunteerId">
+                    <tbody *ngIf="currentRequest && !currentRequest.volunteerId">
                         <ng-container *ngFor="let user of volunteers">
                             <tr *ngIf="!user.requestId">
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
-                                <td>{{user.requestId}}</td>
+                                <td>{{user.requestId | valreplacing}}</td>
                                 <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
                                         class="btn btn-primary">Assign</button></td>
                                 <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'

@@ -13,21 +13,32 @@ import { DataService } from './Services/data.service';
 import { AddVolunteersComponent } from './Components/add-volunteers/add-volunteers.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { VolunteersDashboardComponent } from './Components/volunteers-dashboard/volunteers-dashboard.component';
+import { AdminGuard } from './admin.guard';
+import { ValreplacingPipe } from './valreplacing.pipe';
 
 
 
 @NgModule({
-  declarations: [RegisterComponent, DashboardComponent, SignInComponent, AddVolunteersComponent, NavbarComponent, VolunteersDashboardComponent],
+  declarations: [
+    RegisterComponent, 
+    DashboardComponent, 
+    SignInComponent, 
+    AddVolunteersComponent, 
+    NavbarComponent, 
+    VolunteersDashboardComponent,
+    ValreplacingPipe
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AppRoutingModule
+    AppRoutingModule,    
   ],
   providers: [
     AuthService,
-    DataService
+    DataService,
+    AdminGuard
   ],
   exports: [
     AppRoutingModule

@@ -1,38 +1,69 @@
-<app-navbar></app-navbar>
-<div class="container">
-    <div class="row">
-        <div class="col-md-32  px-2 pt-4 pb-2">
-            <div class="card shadow-lg rounded">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm  bg-white">
+    <div class="container">
+        <a class="navbar-brand logo" href="#">
+            <h2>Sahayi</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" (click)="signout()">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-                <div class="card-body">
-                    <h1 class="card-title">Volunteer Dashboard</h1>
-
-                    <div class="col-md-32 px-2 pt-4 pb-2">
-                        <div class="card shadow-lg rounded ">
-                            <ul class="p-0">
-                                <li class="row py-4 border-bottom" *ngFor="let task of volunteerTaskList">
-                                    <div class="col">name :{{task.username}}</div>
-                                    <div class="col">phone :{{task.mobile}}</div>
-                                    <div class="col"> require item: {{task.requireditem}}</div>
-                                    <div class="col">status: {{task.status}}</div>
-                                    <div *ngIf="task.status == 'Assigned'">
-                                        <button (click)="onAccept(task)"> Accept</button>
-                                    </div>
-                                    <div *ngIf="task.status == 'Assigned'">
-                                        <button (click)="onRejected(task)"> Reject</button>
-                                    </div>
-                                    <div *ngIf="task.status == 'Confirmed'">
-                                        <button (click)="onDone(task)"> Done</button>
-                                    </div>
-                                    <div *ngIf="task.status == 'Confirmed'">
-                                        <button (click)="onNotDone(task)"> Not Done</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+<div class="row" style="justify-content: center;">
+    <div *ngFor="let user of volunteerTaskList" class="card shadow-lg col-lg-3 col-md-4 m-2">
+        <div class="card-body">
+            <div class="card-title d-flex">
+                <h4>{{user.username}}</h4>
+            </div>
+            <table class="table table-responsive">
+                <!-- <thead>
+                      <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead> -->
+                <tbody>
+                    <tr>
+                        <td>Mobile </td>
+                        <td> {{user.mobile}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address </td>
+                        <td> {{user.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Required Item </td>
+                        <td> {{user.requireditem}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status </td>
+                        <td> {{user.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex">
+                <div *ngIf="user.status == 'Volunteer Assigned'">
+                    <button class="btn btn-primary mx-2" (click)="onAccept(user)"> Accept</button>
+                </div>
+                <div *ngIf="user.status == 'Volunteer Assigned'">
+                    <button class="btn btn-danger mx-2" (click)="onRejected(user)"> Reject</button>
+                </div>
+                <div *ngIf="user.status == 'Confirmed'">
+                    <button class="btn btn-primary mx-2" (click)="onDone(user)"> Done</button>
+                </div>
+                <div *ngIf="user.status == 'Confirmed'">
+                    <button class="btn btn-primary mx-2" (click)="onNotDone(user)"> Not Done</button>
                 </div>
             </div>
         </div>
-
     </div>
+</div>

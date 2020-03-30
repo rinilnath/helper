@@ -31,15 +31,10 @@ export class VolunteersDashboardComponent implements OnInit {
         };
       })
     });
-
-
-
   }
 
-
-
   ngOnInit(): void {
-    this.auth.getUserDetails();
+    // this.auth.getUserDetails();
 
     this.totalTaskCount = this.volunteerTaskList && this.volunteerTaskList.length;
 
@@ -76,6 +71,12 @@ export class VolunteersDashboardComponent implements OnInit {
     task.status = 'Not Done';
     task.volunteerId = '';
     this.dataservice.updateTaskStatus(task);
+  }
+
+  signout() {
+    this.auth.logout();
+    const redirectUrl = 'admin/login';
+    this.router.navigate([redirectUrl]);
   }
 
 }

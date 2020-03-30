@@ -6,58 +6,22 @@
 
                 <div class="card-body">
                     <h1 class="card-title">Add Volunteer</h1>
-                    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
-                        <div *ngIf="volunteerForm.controls['name'].invalid && (volunteerForm.controls['name'].dirty || volunteerForm.controls['name'].touched)"
-                            class="my-2 alert alert-danger">
-                            Name is required
-                        </div>
+                    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">                        
                         <label>Name</label>
-                        <input type="text" formControlName="name" id="" class="my-2 form-control">
-
-
-                        <div *ngIf="volunteerForm.controls['phone'].invalid && (volunteerForm.controls['phone'].dirty || volunteerForm.controls['phone'].touched)"
-                            class="my-2 alert alert-danger">
-                            Please enter valid phone number
-                        </div>
+                        <input type="text" formControlName="name" class="my-2 form-control">
+                                                
                         <label>Phone</label>
-                        <input type="text" formControlName="phone" pattern="\d{10}" id="" class="my-2 form-control">
-
-                        <div *ngIf="volunteerForm.controls['ward'].invalid && (volunteerForm.controls['ward'].dirty || volunteerForm.controls['ward'].touched)"
-                            class="my-2 alert alert-danger">
-                            Please enter valid ward number
-                        </div>
+                        <input type="text" formControlName="phone" pattern="\d{10}" class="my-2 form-control">
+                                                
                         <label>ward</label>
-                        <input type="number" formControlName="ward" id="" class="my-2 form-control">
-
-                        <div *ngIf="volunteerForm.controls['email'].invalid && (volunteerForm.controls['email'].dirty || volunteerForm.controls['email'].touched)"
-                            class="my-2 alert alert-danger">
-                            Please enter valid email id
-                        </div>
-                        <label>Email</label>
-                        <input type="email" formControlName="email" id="" class="my-2 form-control">
-
-                        <div *ngIf="volunteerForm.controls['specialisation'].invalid && (volunteerForm.controls['specialisation'].dirty || volunteerForm.controls['specialisation'].touched)"
-                            class="my-2 alert alert-danger">
-                            Please enter valid email id
-                        </div>
+                        <input type="number" formControlName="ward" class="my-2 form-control">
+                        
                         <label>specialisation</label>
                         <select formControlName="specialisation" id="" class="my-2 form-control">
                             <option value="Food Delivery"> Food Delivery </option>
                             <option value="Doctor"> Doctor </option>
                         </select>
-
-                        <div *ngIf="volunteerForm.controls['password'].invalid && (volunteerForm.controls['password'].dirty || volunteerForm.controls['password'].touched)"
-                            class="my-2 alert alert-danger">
-                            Passwords should be atleast 8 charecters in length
-                        </div>
-                        <label>Password</label>
-                        <input type="password" formControlName="password" id="" class="my-2 form-control">
-                        <div *ngIf="(volunteerForm.controls['rpassword'].invalid && (volunteerForm.controls['rpassword'].dirty || volunteerForm.controls['rpassword'].touched))|| (volunteerForm.controls['rpassword'].value!=volunteerForm.controls['password'].value)"
-                            class="my-2 alert alert-danger">
-                            Passwords dont match
-                        </div>
-                        <label>Confirm Password</label>
-                        <input type="password" formControlName="rpassword" id="" class="my-2 form-control">
+                        
                         <button class="my-2 btn btn-success" type="submit">Submit</button>
                     </form>
                 </div>
