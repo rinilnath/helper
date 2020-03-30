@@ -16,6 +16,10 @@ export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist: Observable<any[]>
   volunteerTaskList: UserRequest[]
+  totalTaskCount: number
+  waitingForAcceptTaskCount: number
+  ongoingTaskCount: number
+
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
 
@@ -28,12 +32,30 @@ export class VolunteersDashboardComponent implements OnInit {
       })
     });
 
+
+
   }
 
 
 
   ngOnInit(): void {
     this.auth.getUserDetails();
+
+    this.totalTaskCount = this.volunteerTaskList && this.volunteerTaskList.length;
+
+    this.volunteerTaskList && this.volunteerTaskList.forEach(task => {
+      if (task.status = 'Assigned') {
+        this.waitingForAcceptTaskCount += this.waitingForAcceptTaskCount
+      }
+      if (task.status = 'Confirmed') {
+        this.ongoingTaskCount += this.ongoingTaskCount
+      }
+    });
+
+    console.log("totalTaskCount", this.totalTaskCount);
+    console.log("waitingForAcceptTaskCount", this.waitingForAcceptTaskCount);
+    console.log("ongoingTaskCount", this.ongoingTaskCount);
+
   }
 
   onDone(task) {
