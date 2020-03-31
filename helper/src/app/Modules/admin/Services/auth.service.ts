@@ -38,6 +38,7 @@ export class AuthService {
 
   logout(): void {
     this.volunteerisLoggedIn = false;
+    localStorage.setItem("userId", null);
   }
 
 }

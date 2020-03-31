@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../../Services/data.service';
+import { EncodeDecode } from '../../Services/encodeDecode.service';
 declare var $: any;
 
 @Component({
@@ -14,13 +15,29 @@ export class SignInComponent implements OnInit {
   success = '';
   error = ''
   processing = ''
+  redirectUrl = 'admin/volunteer';
   signinForm = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
     })
-  constructor(public authservice: AuthService, public dataservice: DataService, private router: Router) { }
+  constructor(public authservice: AuthService, public dataservice: DataService, private router: Router,
+    public encodeDecode: EncodeDecode) {
+
+    
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+      // Instance of should be: 
+      // NavigationEnd
+      // NavigationCancel
+      // NavigationError
+      // RoutesRecognized
+    });
+  }
   ngOnInit(): void {
+    this.redirect();
   }
   onSubmit() {
     this.error = '',
@@ -55,23 +72,35 @@ export class SignInComponent implements OnInit {
     let flag = true;
     let req;
     let auth = this.authservice;
-    let rou = this.router;
     this.dataservice.getVolunteerForLogin(this.signinForm.value.email, this.signinForm.value.password).valueChanges().
       subscribe(res => {
         req = res;
         req.forEach(function (values) {
-          localStorage.setItem("userId", "vol-" + values.phone)
+          localStorage.setItem("userId", "vol-" + values.phone);
+          console.log("values.phone", values.phone)
           flag = false;
           auth.login()
         });
         if (flag) {
-          $('.modal-body').html("<p>User not exist with this details</p><p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
+          $('.modal-body').html("<p>User not exist with this details</p>"
+            + "<p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
           $('#myModal').modal('show');
         }
       });
-    if (auth.volunteerisLoggedIn) {
-      const redirectUrl = 'admin/volunteer';
-      rou.navigate([redirectUrl]);
+
+    sessionStorage.setItem("token", this.encodeDecode.encode(localStorage.getItem("userId")));
+    this.redirect();
+  }
+
+  async  redirect() {
+    if (localStorage.getItem("userId") &&
+      this.encodeDecode.decode(sessionStorage.getItem("token")) == localStorage.getItem("userId")) {
+      console.log(this.redirectUrl)
+      this.router.navigateByUrl(this.redirectUrl).then(nav => {
+        console.log(nav); // true if navigation is successful
+      }, err => {
+        console.log(err) // when there's an error
+      });
     }
   }
 }
