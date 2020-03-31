@@ -209,7 +209,7 @@
                     </thead>
                     <tbody *ngIf="currentRequest && currentRequest.volunteerId">
                         <ng-container *ngFor="let user of volunteers">
-                            <tr *ngIf="currentRequest.volunteerId == user.id">
+                            <tr *ngIf="currentRequest.volunteerId == user.id && currentRequest.status != 'Rejected'">
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
@@ -221,7 +221,7 @@
                             </tr>
                         </ng-container>
                     </tbody>
-                    <tbody *ngIf="currentRequest && !currentRequest.volunteerId">
+                    <tbody *ngIf="currentRequest && (!currentRequest.volunteerId || currentRequest.status == 'Rejected')">
                         <ng-container *ngFor="let user of volunteers">
                             <tr *ngIf="!user.requestId">
                                 <td>{{user.name}}</td>

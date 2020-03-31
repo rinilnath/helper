@@ -18,7 +18,7 @@
 </nav>
 
 <div class="row" style="justify-content: center;">
-    <div *ngFor="let user of volunteerTaskList" [ngClass]="{'bg-success': user.status=='Done'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+    <div *ngFor="let user of volunteerTaskList" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': user.status=='Rejected'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
         <div class="card-body">
             <div class="card-title d-flex">
                 <h4>{{user.username}}</h4>
