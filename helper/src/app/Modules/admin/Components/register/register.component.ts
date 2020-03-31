@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
             name: this.registrationForm.value.name.toLowerCase(),
             district: this.registrationForm.value.district.toLowerCase()
           }).then(async data => {
-            console.log(data)
+            //console.log(data)
             this.processing=''
             this.success = "Succesfuly registered . Redirecting you to dashboard"
             await this.authservice.signout()

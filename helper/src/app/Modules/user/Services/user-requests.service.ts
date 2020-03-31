@@ -14,7 +14,7 @@ export class UserRequestsService {
   }
 
   addRequest(data: any) {
-    this.fire.collection("userRequest").add(data);
+    this.fire.collection("userRequest").doc("req-"+data.mobile).set(data);
   }
 
   getRequest(mobile) {

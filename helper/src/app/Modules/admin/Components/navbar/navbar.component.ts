@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   signout() {
     this.auth.signout()
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.router.navigate(['admin/login'])
       })
       .catch(data => console.log(data))
