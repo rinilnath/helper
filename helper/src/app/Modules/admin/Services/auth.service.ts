@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
 
-  volunteerisLoggedIn = true;
+  volunteerisLoggedIn = false;
   redirectUrl: string;
 
   constructor(public auth: AngularFireAuth,) { }

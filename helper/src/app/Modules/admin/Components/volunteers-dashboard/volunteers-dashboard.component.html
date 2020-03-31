@@ -18,7 +18,7 @@
 </nav>
 
 <div class="row" style="justify-content: center;">
-    <div *ngFor="let user of volunteerTaskList" class="card shadow-lg col-lg-3 col-md-4 m-2">
+    <div *ngFor="let user of volunteerTaskList" [ngClass]="{'bg-success': user.status=='Done'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
         <div class="card-body">
             <div class="card-title d-flex">
                 <h4>{{user.username}}</h4>
@@ -51,10 +51,10 @@
                 </tbody>
             </table>
             <div class="d-flex">
-                <div *ngIf="user.status == 'Volunteer Assigned'">
+                <div *ngIf="user.status == 'Assigned'">
                     <button class="btn btn-primary mx-2" (click)="onAccept(user)"> Accept</button>
                 </div>
-                <div *ngIf="user.status == 'Volunteer Assigned'">
+                <div *ngIf="user.status == 'Assigned'">
                     <button class="btn btn-danger mx-2" (click)="onRejected(user)"> Reject</button>
                 </div>
                 <div *ngIf="user.status == 'Confirmed'">

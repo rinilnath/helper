@@ -120,7 +120,7 @@ export class UserComponent implements OnInit {
           }
           if (!flag && !flag2) {
             flag2 = true;
-            data.status = "submitted";
+            data.status = "Submitted";
             this.userRequest.addRequest(data);
             $('.modal-body').html("<p>Your request submitted successfully</p><p>We will contact you soon</p>");
             $('#myModal').modal('show');

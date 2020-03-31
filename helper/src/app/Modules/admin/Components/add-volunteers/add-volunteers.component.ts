@@ -30,8 +30,8 @@ export class AddVolunteersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.volunteerlist)
   }
+  
   onSubmit() {    
     this.volunteerForm.value.district = localStorage.getItem("District")
     this.volunteerForm.value.localbody = localStorage.getItem("LocalBody")

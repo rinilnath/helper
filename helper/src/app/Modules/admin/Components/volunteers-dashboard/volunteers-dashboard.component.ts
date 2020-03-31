@@ -14,7 +14,7 @@ import { UserRequest } from '../../../user/Services/userRequest.model';
 
 export class VolunteersDashboardComponent implements OnInit {
 
-  volunteerlist: Observable<any[]>
+  volunteerlist;
   volunteerTaskList: UserRequest[]
   totalTaskCount: number
   waitingForAcceptTaskCount: number
@@ -30,7 +30,7 @@ export class VolunteersDashboardComponent implements OnInit {
           ...e.payload.doc.data() as UserRequest
         };
       })
-    });
+    });    
   }
 
   ngOnInit(): void {
@@ -47,14 +47,22 @@ export class VolunteersDashboardComponent implements OnInit {
       }
     });
 
-    console.log("totalTaskCount", this.totalTaskCount);
-    console.log("waitingForAcceptTaskCount", this.waitingForAcceptTaskCount);
-    console.log("ongoingTaskCount", this.ongoingTaskCount);
+    this.dataservice.getVolunteer(localStorage.getItem('userId')).valueChanges().subscribe(
+      res => { 
+        this.volunteerlist = res;
+      }
+    )
+
+    // console.log("totalTaskCount", this.totalTaskCount);
+    // console.log("waitingForAcceptTaskCount", this.waitingForAcceptTaskCount);
+    // console.log("ongoingTaskCount", this.ongoingTaskCount);
 
   }
 
   onDone(task) {
     task.status = 'Done';
+    this.volunteerlist.requestId = "";
+    this.dataservice.updateVolunteer(localStorage.getItem('userId'), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
 
@@ -64,7 +72,8 @@ export class VolunteersDashboardComponent implements OnInit {
   }
   onRejected(task) {
     task.status = 'Rejected';
-    task.volunteerId = '';
+    this.volunteerlist.requestId = "";
+    this.dataservice.updateVolunteer(localStorage.getItem('userId'), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
   onNotDone(task) {

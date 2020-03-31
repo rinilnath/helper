@@ -54,4 +54,8 @@ export class DataService {
     return this.fire.collection("volunteers").doc(data.id).set(data)
   }
 
+  updateVolunteer(uid, data) {
+    return this.fire.collection("volunteers").doc(uid).set(data)
+  }
+
 }

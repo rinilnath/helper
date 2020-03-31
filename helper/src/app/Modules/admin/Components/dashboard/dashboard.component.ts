@@ -58,9 +58,9 @@ export class DashboardComponent implements OnInit {
   }
 
   assignVolunteer(volunteer: Volunteer) {
-    if(!this.currentRequest.volunteerId){
+    if(!this.currentRequest.volunteerId || this.currentRequest.status == 'Rejected'){
     this.currentRequest.volunteerId = volunteer.id;
-    this.currentRequest.status = "Volunteer Assigned"
+    this.currentRequest.status = "Assigned"
     volunteer.requestId = this.currentRequest.id;
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     if(this.currentRequest.volunteerId == volunteer.id) {
     this.currentRequest.volunteerId = null;
     volunteer.requestId = null;
-    this.currentRequest.status = "submitted";
+    this.currentRequest.status = "Submitted";
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
