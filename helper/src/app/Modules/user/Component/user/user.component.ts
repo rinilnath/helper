@@ -110,7 +110,7 @@ export class UserComponent implements OnInit {
         this.getRequest(this.userRequest.userRequestFormData.mobile).subscribe(res => {
           req = res;
           req.forEach(function (values) {
-            if (values.mobile == data.mobile) {
+            if (values.mobile == data.mobile && values.status != 'Done') {
               flag = true
             }
           });
