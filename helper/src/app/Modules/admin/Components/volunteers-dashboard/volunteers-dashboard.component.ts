@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../../Services/data.service';
-import { Observable } from 'rxjs';
 import { UserRequest } from '../../../user/Services/userRequest.model';
 
 import * as CryptoJS from 'crypto-js';
 
+import { AuthService } from '../../Services/auth.service';
+import { DataService } from '../../Services/data.service';
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,14 @@ export class VolunteersDashboardComponent implements OnInit {
   totalTaskCount: number
   waitingForAcceptTaskCount: number
   ongoingTaskCount: number
+  resetForm = new FormGroup(
+    {
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      rpassword: new FormControl('', [Validators.required, Validators.minLength(8)])
+    })
+  success = '';
+  error = ''
+  processing = '';
 
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
@@ -89,6 +98,28 @@ export class VolunteersDashboardComponent implements OnInit {
     sessionStorage.clear();
     const redirectUrl = 'admin/login';
     this.router.navigate([redirectUrl]);
+  }
+
+  onSubmit() {
+    this.error = '',
+      this.success = ''
+    if (!this.resetForm.invalid) {
+      this.processing = 'Resetting ..';
+      this.dataservice.restPassword(localStorage.getItem("userId"), this.resetForm.value.password).then(data => {
+        this.success = 'Successfully reset the password'
+        this.processing = ''
+      }).catch(data => {
+        this.processing = ""
+        console.log(data)
+        this.error = data.message
+        $('#myModal').modal('show');
+      })
+    }
+    else {
+      this.error = "All fields are required"
+      console.log(this.error)
+      $('#myModal').modal('show');
+    }
   }
 
 }

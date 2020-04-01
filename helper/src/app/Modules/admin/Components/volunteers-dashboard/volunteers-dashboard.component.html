@@ -18,7 +18,39 @@
 </nav>
 
 <div class="row" style="justify-content: center;">
-    <div *ngFor="let user of volunteerTaskList" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': user.status=='Rejected'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+
+    <div class="card-body">
+        <h1 class="card-title">Password Reset</h1>
+        <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="processing" class="my-2 alert alert-primary">
+                {{this.processing}}
+            </div>
+            <div *ngIf="error" class="my-2 alert alert-danger">
+                {{this.error}}
+            </div>
+            <div *ngIf="success" class="my-2 alert alert-success">
+                {{this.success}}
+            </div>
+
+            <div *ngIf="resetForm.controls['password'].invalid && (resetForm.controls['password'].dirty || resetForm.controls['password'].touched)"
+                class="my-2 alert alert-danger">
+                Passwords should be atleast 8 charecters in length
+            </div>
+            <label>Password</label>
+            <input type="password" formControlName="password" id="" class="my-2 form-control">
+            <div *ngIf="(resetForm.controls['rpassword'].invalid && (resetForm.controls['rpassword'].dirty || resetForm.controls['rpassword'].touched))|| (resetForm.controls['rpassword'].value!=resetForm.controls['password'].value)"
+                class="my-2 alert alert-danger">
+                Passwords dont match
+            </div>
+            <label>Password</label>
+            <input type="password" formControlName="rpassword" id="" class="my-2 form-control">
+            <button class="my-2 btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div *ngFor="let user of volunteerTaskList"
+        [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': user.status=='Rejected'}"
+        class="card shadow-lg col-lg-3 col-md-4 m-2">
         <div class="card-body">
             <div class="card-title d-flex">
                 <h4>{{user.username}}</h4>
@@ -65,5 +97,21 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Password is not valid</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
