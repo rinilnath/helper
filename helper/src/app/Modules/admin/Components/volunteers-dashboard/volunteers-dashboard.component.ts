@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../Services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../../Services/data.service';
-import { Observable } from 'rxjs';
 import { UserRequest } from '../../../user/Services/userRequest.model';
-import { Volunteer } from '../../Services/volunteer.model';
+import { AuthService } from '../../Services/auth.service';
+import { DataService } from '../../Services/data.service';
 declare var $: any;
 
 @Component({
@@ -17,7 +15,6 @@ declare var $: any;
 export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist;
-  volunteerDetails: Volunteer[];
   volunteerTaskList: UserRequest[]
   totalTaskCount: number
   waitingForAcceptTaskCount: number
