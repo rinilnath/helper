@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.volunteerisLoggedIn) { return true; }
+    if (this.authService.checkLogin()) { return true; }
     // Navigate to the login page with extras
     this.router.navigate(['admin/login']);
     return false;

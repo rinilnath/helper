@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  volunteerisLoggedIn = false;
+
   redirectUrl: string;
 
-  constructor(public auth: AngularFireAuth,) { }
+  constructor(public auth: AngularFireAuth, ) { }
 
-  register(email,password){
-    return this.auth.createUserWithEmailAndPassword(email,password)
+  register(email, password) {
+    return this.auth.createUserWithEmailAndPassword(email, password)
   }
-  signin(email,password){
-    return this.auth.signInWithEmailAndPassword(email,password)
+  signin(email, password) {
+    return this.auth.signInWithEmailAndPassword(email, password)
   }
-  signout(){
+  signout() {
     return this.auth.signOut()
   }
 
-  getUser(){
-    this.auth.user.subscribe(data=>data.uid)
+  getUser() {
+    this.auth.user.subscribe(data => data.uid)
   }
-  
+
   // getUserDetails() {
   //   this.auth.user.subscribe(data=> {
   //     localStorage.setItem("userId",data.uid)
@@ -32,13 +33,14 @@ export class AuthService {
   //   });
   // }
 
-  login(): void {
-    this.volunteerisLoggedIn = true;
+  checkLogin(): Boolean {
+    if (localStorage.getItem("userId")) {
+      let a = CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8);
+      let b = CryptoJS.AES.decrypt(sessionStorage.getItem("key"), "jarigoalak").toString(CryptoJS.enc.Utf8);
+      if (a == b) {
+        return true;
+      }
+    }
+    return false;
   }
-
-  logout(): void {
-    this.volunteerisLoggedIn = false;
-    localStorage.setItem("userId", null);
-  }
-
 }

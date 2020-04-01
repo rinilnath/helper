@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { DataService } from '../../Services/data.service';
-import { EncodeDecode } from '../../Services/encodeDecode.service';
+import * as CryptoJS from 'crypto-js';
+
 declare var $: any;
 
 @Component({
@@ -15,34 +16,23 @@ export class SignInComponent implements OnInit {
   success = '';
   error = ''
   processing = ''
-  redirectUrl = 'admin/volunteer';
   signinForm = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
     })
-  constructor(public authservice: AuthService, public dataservice: DataService, private router: Router,
-    public encodeDecode: EncodeDecode) {
-
-    
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.ngOnInit();
-      }
-      // Instance of should be: 
-      // NavigationEnd
-      // NavigationCancel
-      // NavigationError
-      // RoutesRecognized
-    });
-  }
+  constructor(public authservice: AuthService, public dataservice: DataService, private router: Router) { }
   ngOnInit(): void {
-    this.redirect();
+    if(localStorage.getItem("userId")) {
+      this.router.navigate(['/admin/volunteer'])
+    }
   }
   onSubmit() {
     this.error = '',
       this.success = ''
     if (!this.signinForm.invalid) {
+      localStorage.clear();
+      sessionStorage.clear();
       this.processing = 'Logging you in ..'
       this.authservice.signin(this.signinForm.value.email, this.signinForm.value.password)
         .then(data => {
@@ -69,38 +59,24 @@ export class SignInComponent implements OnInit {
   }
 
   volunteerLogin() {
-    let flag = true;
     let req;
-    let auth = this.authservice;
-    this.dataservice.getVolunteerForLogin(this.signinForm.value.email, this.signinForm.value.password).valueChanges().
-      subscribe(res => {
-        req = res;
-        req.forEach(function (values) {
-          localStorage.setItem("userId", "vol-" + values.phone);
-          console.log("values.phone", values.phone)
-          flag = false;
-          auth.login()
-        });
-        if (flag) {
-          $('.modal-body').html("<p>User not exist with this details</p>"
-            + "<p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
+    this.processing = 'Please Wait ...'
+    localStorage.clear();
+    sessionStorage.clear();
+    this.dataservice.getVolunteer("vol-"+this.signinForm.value.email).valueChanges().subscribe(
+      async res => {
+        req = res
+        if (req && (req.password == this.signinForm.value.password)) {
+          const redirectUrl = 'admin/volunteer';
+          localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-"+ this.signinForm.value.email.trim(),"akalgorija")); 
+          sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-"+ this.signinForm.value.email.trim(),"jarigoalak"));
+          this.router.navigate([redirectUrl]);
+        } else {
+          this.processing = ''
+          $('.modal-body').html("<p>User not exist with this details</p><p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
           $('#myModal').modal('show');
         }
-      });
-
-    sessionStorage.setItem("token", this.encodeDecode.encode(localStorage.getItem("userId")));
-    this.redirect();
-  }
-
-  async  redirect() {
-    if (localStorage.getItem("userId") &&
-      this.encodeDecode.decode(sessionStorage.getItem("token")) == localStorage.getItem("userId")) {
-      console.log(this.redirectUrl)
-      this.router.navigateByUrl(this.redirectUrl).then(nav => {
-        console.log(nav); // true if navigation is successful
-      }, err => {
-        console.log(err) // when there's an error
-      });
-    }
+      }
+    );    
   }
 }

@@ -30,10 +30,6 @@ export class DataService {
     return this.fire.collection("volunteers", ref => ref.where('district', '==', district).where('localbody', '==', localbody));
   }
 
-  getVolunteerForLogin(mobile, password) {
-    return this.fire.collection("volunteers", ref => ref.where('phone', '==', mobile).where('password', '==', password));
-  }
-
   getVolunteerTaskList(uid) {
     return this.fire.collection("userRequest", ref => ref.where('volunteerId', '==', uid)).snapshotChanges()
   }

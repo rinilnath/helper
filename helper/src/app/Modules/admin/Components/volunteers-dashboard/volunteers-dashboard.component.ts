@@ -5,6 +5,8 @@ import { DataService } from '../../Services/data.service';
 import { Observable } from 'rxjs';
 import { UserRequest } from '../../../user/Services/userRequest.model';
 
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -23,14 +25,14 @@ export class VolunteersDashboardComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
 
-    this.dataservice.getVolunteerTaskList(localStorage.getItem("userId")).subscribe(data => {
+    this.dataservice.getVolunteerTaskList(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8)).subscribe(data => {
       this.volunteerTaskList = data.map(e => {
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as UserRequest
         };
       })
-    });    
+    });
   }
 
   ngOnInit(): void {
@@ -47,8 +49,8 @@ export class VolunteersDashboardComponent implements OnInit {
       }
     });
 
-    this.dataservice.getVolunteer(localStorage.getItem('userId')).valueChanges().subscribe(
-      res => { 
+    this.dataservice.getVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8)).valueChanges().subscribe(
+      res => {
         this.volunteerlist = res;
       }
     )
@@ -83,7 +85,8 @@ export class VolunteersDashboardComponent implements OnInit {
   }
 
   signout() {
-    this.auth.logout();
+    localStorage.clear();
+    sessionStorage.clear();
     const redirectUrl = 'admin/login';
     this.router.navigate([redirectUrl]);
   }
