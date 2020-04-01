@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../Services/data.service';
 import { Observable } from 'rxjs';
 import { UserRequest } from '../../../user/Services/userRequest.model';
-
+import { Volunteer } from '../../Services/volunteer.model';
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +17,19 @@ import { UserRequest } from '../../../user/Services/userRequest.model';
 export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist;
+  volunteerDetails: Volunteer[];
   volunteerTaskList: UserRequest[]
   totalTaskCount: number
   waitingForAcceptTaskCount: number
   ongoingTaskCount: number
+  resetForm = new FormGroup(
+    {
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      rpassword: new FormControl('', [Validators.required, Validators.minLength(8)])
+    })
+  success = '';
+  error = ''
+  processing = '';
 
 
   constructor(private auth: AuthService, private router: Router, private dataservice: DataService) {
@@ -30,7 +41,8 @@ export class VolunteersDashboardComponent implements OnInit {
           ...e.payload.doc.data() as UserRequest
         };
       })
-    });    
+    });
+
   }
 
   ngOnInit(): void {
@@ -46,12 +58,6 @@ export class VolunteersDashboardComponent implements OnInit {
         this.ongoingTaskCount += this.ongoingTaskCount
       }
     });
-
-    this.dataservice.getVolunteer(localStorage.getItem('userId')).valueChanges().subscribe(
-      res => { 
-        this.volunteerlist = res;
-      }
-    )
 
     // console.log("totalTaskCount", this.totalTaskCount);
     // console.log("waitingForAcceptTaskCount", this.waitingForAcceptTaskCount);
@@ -86,6 +92,28 @@ export class VolunteersDashboardComponent implements OnInit {
     this.auth.logout();
     const redirectUrl = 'admin/login';
     this.router.navigate([redirectUrl]);
+  }
+
+  onSubmit() {
+    this.error = '',
+      this.success = ''
+    if (!this.resetForm.invalid) {
+      this.processing = 'Resetting ..';
+      this.dataservice.restPassword(localStorage.getItem("userId"), this.resetForm.value.password).then(data => {
+        this.success = 'Successfully reset the password'
+        this.processing = ''
+      }).catch(data => {
+        this.processing = ""
+        console.log(data)
+        this.error = data.message
+        $('#myModal').modal('show');
+      })
+    }
+    else {
+      this.error = "All fields are required"
+      console.log(this.error)
+      $('#myModal').modal('show');
+    }
   }
 
 }
