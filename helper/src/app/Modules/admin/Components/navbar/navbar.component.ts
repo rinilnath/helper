@@ -18,8 +18,7 @@ export class NavbarComponent implements OnInit {
     sessionStorage.clear();
     this.auth.signout()
       .then(data => {
-        //console.log(data);
-        this.router.navigate(['admin/login'])
+        location.reload();
       })
       .catch(data => console.log(data))
   }

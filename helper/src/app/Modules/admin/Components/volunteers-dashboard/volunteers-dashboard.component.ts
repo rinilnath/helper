@@ -73,7 +73,7 @@ export class VolunteersDashboardComponent implements OnInit {
   onDone(task) {
     task.status = 'Done';
     this.volunteerlist.requestId = "";
-    this.dataservice.updateVolunteer(localStorage.getItem('userId'), this.volunteerlist)
+    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
 
@@ -84,20 +84,20 @@ export class VolunteersDashboardComponent implements OnInit {
   onRejected(task) {
     task.status = 'Rejected';
     this.volunteerlist.requestId = "";
-    this.dataservice.updateVolunteer(localStorage.getItem('userId'), this.volunteerlist)
+    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
   onNotDone(task) {
-    task.status = 'Not Done';
-    task.volunteerId = '';
+    task.status = 'Not Done';    
+    this.volunteerlist.requestId = "";
+    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
 
   signout() {
     localStorage.clear();
     sessionStorage.clear();
-    const redirectUrl = 'admin/login';
-    this.router.navigate([redirectUrl]);
+    location.reload();
   }
 
   onSubmit() {
@@ -105,7 +105,7 @@ export class VolunteersDashboardComponent implements OnInit {
       this.success = ''
     if (!this.resetForm.invalid) {
       this.processing = 'Resetting ..';
-      this.dataservice.restPassword(localStorage.getItem("userId"), this.resetForm.value.password).then(data => {
+      this.dataservice.restPassword(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.resetForm.value.password).then(data => {
         this.success = 'Successfully reset the password'
         this.processing = ''
       }).catch(data => {

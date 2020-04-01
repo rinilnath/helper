@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
     })
   constructor(public authservice: AuthService, public dataservice: DataService, private router: Router) { }
   ngOnInit(): void {
-    if(localStorage.getItem("userId")) {
+    if(sessionStorage.getItem("key")) {
       this.router.navigate(['/admin/volunteer'])
     }
   }
@@ -76,6 +76,10 @@ export class SignInComponent implements OnInit {
           $('.modal-body').html("<p>User not exist with this details</p><p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");
           $('#myModal').modal('show');
         }
+      },
+      (error) => {
+        $('.modal-body').html("<p>Connection Error</p>");
+          $('#myModal').modal('show');
       }
     );    
   }

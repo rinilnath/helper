@@ -4,6 +4,42 @@
     <h4>Local Body : {{localbody}}</h4>
     <div class="row" style="justify-content: center;">
         <ng-container *ngFor="let user of requestDetails">
+            <div *ngIf="user.status == 'Not Done'" [ngClass]="{'bg-danger': user.status=='Not Done'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+                <div class="card-body">
+                    <div class="card-title d-flex">
+                        <h4>{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                                class="fa fa-edit"></i></button>
+                    </div>
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td>Mobile </td>
+                                <td> {{user.mobile}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address </td>
+                                <td> {{user.address}}</td>
+                            </tr>
+                            <tr>
+                                <td>Required Item </td>
+                                <td> {{user.requireditem}}</td>
+                            </tr>
+                            <tr>
+                                <td>Volunteer </td>
+                                <td> {{user.volunteerId | valreplacing}}</td>
+                            </tr>
+                            <tr>
+                                <td>Status </td>
+                                <td> {{user.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let user of requestDetails">
             <div *ngIf="user.status == 'Rejected'" [ngClass]="{'bg-danger': user.status=='Rejected'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
@@ -209,7 +245,7 @@
                     </thead>
                     <tbody *ngIf="currentRequest && currentRequest.volunteerId">
                         <ng-container *ngFor="let user of volunteers">
-                            <tr *ngIf="currentRequest.volunteerId == user.id && currentRequest.status != 'Rejected'">
+                            <tr *ngIf="currentRequest.volunteerId == user.id && currentRequest.status != 'Rejected' && currentRequest.status != 'Not Done'">
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
@@ -221,7 +257,7 @@
                             </tr>
                         </ng-container>
                     </tbody>
-                    <tbody *ngIf="currentRequest && (!currentRequest.volunteerId || currentRequest.status == 'Rejected')">
+                    <tbody *ngIf="currentRequest && (!currentRequest.volunteerId || currentRequest.status == 'Rejected' || currentRequest.status == 'Not Done')">
                         <ng-container *ngFor="let user of volunteers">
                             <tr *ngIf="!user.requestId">
                                 <td>{{user.name}}</td>
