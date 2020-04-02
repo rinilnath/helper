@@ -23,13 +23,14 @@ export class SignInComponent implements OnInit {
     })
   constructor(public authservice: AuthService, public dataservice: DataService, private router: Router) { }
   ngOnInit(): void {
-    if(sessionStorage.getItem("key")) {
+    if (sessionStorage.getItem("key")) {
       this.router.navigate(['/admin/volunteer'])
     }
   }
   onSubmit() {
-    this.error = '',
-      this.success = ''
+    this.error = ''
+    this.success = ''
+    this.processing = 'Please Wait...'
     if (!this.signinForm.invalid) {
       localStorage.clear();
       sessionStorage.clear();
@@ -63,13 +64,13 @@ export class SignInComponent implements OnInit {
     this.processing = 'Please Wait ...'
     localStorage.clear();
     sessionStorage.clear();
-    this.dataservice.getVolunteer("vol-"+this.signinForm.value.email).valueChanges().subscribe(
+    this.dataservice.getVolunteer("vol-" + this.signinForm.value.email).valueChanges().subscribe(
       async res => {
         req = res
         if (req && (req.password == this.signinForm.value.password)) {
           const redirectUrl = 'admin/volunteer';
-          localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-"+ this.signinForm.value.email.trim(),"akalgorija")); 
-          sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-"+ this.signinForm.value.email.trim(),"jarigoalak"));
+          localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "akalgorija"));
+          sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "jarigoalak"));
           this.router.navigate([redirectUrl]);
         } else {
           this.processing = ''
@@ -79,8 +80,8 @@ export class SignInComponent implements OnInit {
       },
       (error) => {
         $('.modal-body').html("<p>Connection Error</p>");
-          $('#myModal').modal('show');
+        $('#myModal').modal('show');
       }
-    );    
+    );
   }
 }

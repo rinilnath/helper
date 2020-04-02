@@ -61,7 +61,10 @@ export class DashboardComponent implements OnInit {
     if(!this.currentRequest.volunteerId || this.currentRequest.status == 'Rejected' || this.currentRequest.status == 'Not Done'){
     this.currentRequest.volunteerId = volunteer.id;
     this.currentRequest.status = "Assigned"
-    volunteer.requestId = this.currentRequest.id;
+    if(volunteer.requestId == null) {
+      volunteer.requestId = "";
+    }
+    volunteer.requestId += this.currentRequest.id+", ";
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
@@ -72,7 +75,7 @@ export class DashboardComponent implements OnInit {
   removeVolunteer(volunteer: Volunteer) {
     if(this.currentRequest.volunteerId == volunteer.id) {
     this.currentRequest.volunteerId = null;
-    volunteer.requestId = null;
+    volunteer.requestId = volunteer.requestId.replace(this.currentRequest.id+", ","");
     this.currentRequest.status = "Submitted";
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);

@@ -72,7 +72,7 @@ export class VolunteersDashboardComponent implements OnInit {
 
   onDone(task) {
     task.status = 'Done';
-    this.volunteerlist.requestId = "";
+    this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
     this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
     this.dataservice.updateTaskStatus(task);
   }
@@ -82,16 +82,26 @@ export class VolunteersDashboardComponent implements OnInit {
     this.dataservice.updateTaskStatus(task);
   }
   onRejected(task) {
-    task.status = 'Rejected';
-    this.volunteerlist.requestId = "";
-    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
-    this.dataservice.updateTaskStatus(task);
+    task.Discription = prompt("Reason For Rejection")
+    if (task.Discription) {
+      task.status = 'Rejected';
+      this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
+      this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
+      this.dataservice.updateTaskStatus(task);
+    } else {
+      alert("Please provide reason for rejection")
+    }
   }
   onNotDone(task) {
-    task.status = 'Not Done';    
-    this.volunteerlist.requestId = "";
-    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
-    this.dataservice.updateTaskStatus(task);
+    task.Discription = prompt("Please provide reason")
+    if (task.Discription) {
+      task.status = 'Not Done';
+      this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
+      this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
+      this.dataservice.updateTaskStatus(task);
+    } else {
+      alert("Please provide reason")
+    }
   }
 
   signout() {

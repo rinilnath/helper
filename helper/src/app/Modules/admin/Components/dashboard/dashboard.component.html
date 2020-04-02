@@ -1,14 +1,17 @@
 <app-navbar></app-navbar>
 <div class="container-fluid py-4">
-    <h4>District : {{district}}</h4>
-    <h4>Local Body : {{localbody}}</h4>
+    <div style="text-align: right;">
+        <p>District : {{district}}</p>
+        <p style="margin-top: -15px;">Local Body : {{localbody}}</p>
+    </div>
     <div class="row" style="justify-content: center;">
         <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Not Done'" [ngClass]="{'bg-danger': user.status=='Not Done'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div *ngIf="user.status == 'Not Done'" [ngClass]="{'bg-danger': user.status=='Not Done'}"
+                class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                        <button (click)="updateRequest(user)" class="btn btn-raised btn-info ml-auto mx-3"><i
                                 class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
@@ -32,6 +35,10 @@
                             <tr>
                                 <td>Status </td>
                                 <td> {{user.status}}</td>
+                            </tr>
+                            <tr>
+                                <td>Discription </td>
+                                <td> {{user.Discription}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -40,11 +47,12 @@
             </div>
         </ng-container>
         <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Rejected'" [ngClass]="{'bg-danger': user.status=='Rejected'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div *ngIf="user.status == 'Rejected'" [ngClass]="{'bg-danger': user.status=='Rejected'}"
+                class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                        <button (click)="updateRequest(user)" class="btn btn-raised btn-info ml-auto mx-3"><i
                                 class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
@@ -68,6 +76,10 @@
                             <tr>
                                 <td>Status </td>
                                 <td> {{user.status}}</td>
+                            </tr>
+                            <tr>
+                                <td>Discription </td>
+                                <td> {{user.Discription}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,7 +92,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                        <button (click)="updateRequest(user)" class="btn btn-raised btn-info ml-auto mx-3"><i
                                 class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
@@ -112,11 +124,12 @@
             </div>
         </ng-container>
         <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Assigned'" [ngClass]="{'bg-warning': user.status=='Assigned'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div *ngIf="user.status == 'Assigned'" [ngClass]="{'bg-light': user.status=='Assigned'}"
+                class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                        <button (click)="updateRequest(user)" class="btn btn-raised btn-info ml-auto mx-3"><i
                                 class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
@@ -147,11 +160,12 @@
             </div>
         </ng-container>
         <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Confirmed'" [ngClass]="{'bg-info': user.status=='Confirmed'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div *ngIf="user.status == 'Confirmed'" [ngClass]="{'bg-info': user.status=='Confirmed'}"
+                class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
+                        <button (click)="updateRequest(user)" class="btn btn-raised btn-info ml-auto mx-3"><i
                                 class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
@@ -182,12 +196,13 @@
             </div>
         </ng-container>
         <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Done'" [ngClass]="{'bg-success': user.status=='Done'}" class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div *ngIf="user.status == 'Done'" [ngClass]="{'bg-success': user.status=='Done'}"
+                class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h4>{{user.username}}</h4>
-                        <button *ngIf = "user.status != 'Done'" (click)="updateRequest(user)" class="btn btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <button *ngIf="user.status != 'Done'" (click)="updateRequest(user)"
+                            class="btn btn-raised btn-info ml-auto mx-3"><i class="fa fa-edit"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -216,7 +231,7 @@
 
                 </div>
             </div>
-        </ng-container>        
+        </ng-container>
     </div>
 </div>
 
@@ -232,23 +247,26 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
-                <table *ngIf="volunteers" class="table table-responsive table-bordered" style="text-align: center;">
+            <div class="modal-body table-responsive">
+                <table *ngIf="volunteers" class="table table-bordered" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>Specialisation</th>
+                            <th>Ward</th>
                             <th>Request Assigned</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody *ngIf="currentRequest && currentRequest.volunteerId">
                         <ng-container *ngFor="let user of volunteers">
-                            <tr *ngIf="currentRequest.volunteerId == user.id && currentRequest.status != 'Rejected' && currentRequest.status != 'Not Done'">
+                            <tr
+                                *ngIf="currentRequest.volunteerId == user.id && currentRequest.status != 'Rejected' && currentRequest.status != 'Not Done'">
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
+                                <td>{{user.ward}}</td>
                                 <td>{{user.requestId | valreplacing}}</td>
                                 <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
                                         class="btn btn-primary">Assign</button></td>
@@ -257,17 +275,18 @@
                             </tr>
                         </ng-container>
                     </tbody>
-                    <tbody *ngIf="currentRequest && (!currentRequest.volunteerId || currentRequest.status == 'Rejected' || currentRequest.status == 'Not Done')">
+                    <tbody
+                        *ngIf="currentRequest && (!currentRequest.volunteerId || currentRequest.status == 'Rejected' || currentRequest.status == 'Not Done')">
                         <ng-container *ngFor="let user of volunteers">
-                            <tr *ngIf="!user.requestId">
+                            <tr>
                                 <td>{{user.name}}</td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
-                                <td>{{user.requestId}}</td>
-                                <td *ngIf="!user.requestId"><button (click)='assignVolunteer(user)'
+                                <td>{{user.ward}}</td>
+                                <td *ngIf = "!user.requestId">{{user.requestId}}</td>
+                                <td *ngIf = "user.requestId">{{user.requestId | valreplacing}}</td>
+                                <td><button (click)='assignVolunteer(user)'
                                         class="btn btn-primary">Assign</button></td>
-                                <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'
-                                        class="btn btn-danger">Remove</button></td>
                             </tr>
                         </ng-container>
                     </tbody>
@@ -276,7 +295,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal">Close</button>
             </div>
 
         </div>

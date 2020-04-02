@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm  bg-white">
     <div class="container">
-        <a class="navbar-brand logo" href="#"><h2>Sahayi</h2></a>
+        <a class="navbar-brand logo" href="#">
+            <h2>Sahayi</h2>
+        </a>
     </div>
 </nav>
 
@@ -8,31 +10,33 @@
     <div class="row">
         <div class="col-md-4 offset-md-4 px-2 pt-4 pb-2">
             <div class="card shadow-lg rounded">
-
                 <div class="card-body">
                     <h1 class="card-title">Log in</h1>
-
-                    <form [formGroup]="signinForm">
-                        <div *ngIf="processing" class="my-2 alert alert-primary">
-                            {{this.processing}}
-                        </div>
-                        <div *ngIf="success" class="my-2 alert alert-success">
-                            {{this.success}}
-                        </div>
+                    <div *ngIf="processing" class="my-2 alert alert-primary">
+                        {{this.processing}}
+                    </div>
+                    <div *ngIf="success" class="my-2 alert alert-success">
+                        {{this.success}}
+                    </div>
+                    <form [formGroup]="signinForm">                        
                         <!-- <div *ngIf="signinForm.controls['email'].invalid && (signinForm.controls['email'].dirty || signinForm.controls['email'].touched)"
                             class="my-2 alert alert-danger">
                             Please enter valid email id
                         </div> -->
-                        <label>Email/Mobile</label>
-                        <input type="email" formControlName="email" id="" class="my-2 form-control">
-                        <div *ngIf="signinForm.controls['password'].invalid && (signinForm.controls['password'].dirty || signinForm.controls['password'].touched)"
-                            class="my-2 alert alert-danger">
-                            Passwords should be atleast 8 charecters in length
+                        <div class="form-group">
+                            <label for="email" class="bmd-label-floating">Email/Mobile</label>
+                            <input type="email" formControlName="email" id="email" class="my-2 form-control">
                         </div>
-                        <label>Password</label>
-                        <input type="password" formControlName="password" id="" class="my-2 form-control">
-                        <button type="button" (click)="onSubmit()" class="btn btn-success">Local-Body</button>
-                        <button type="button" (click)="volunteerLogin()" class="btn btn-success ml-3">Volunteer</button>
+                        <div class="form-group">
+                            <label class="bmd-label-floating" for="pass">Password</label>
+                            <input type="password" formControlName="password" id="pass" class="my-2 form-control">
+                            <div *ngIf="signinForm.controls['password'].invalid && (signinForm.controls['password'].dirty || signinForm.controls['password'].touched)"
+                                class="my-2 alert alert-danger">
+                                Passwords should be atleast 8 charecters in length
+                            </div>
+                        </div>
+                        <button type="button" (click)="onSubmit()" class="btn btn-raised btn-success">Local-Body</button>
+                        <button type="button" (click)="volunteerLogin()" class="btn btn-raised btn-success ml-3">Volunteer</button>
                     </form>
                 </div>
             </div>
@@ -52,6 +56,5 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>

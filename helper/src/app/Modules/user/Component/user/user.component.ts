@@ -39,6 +39,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(function () {
+      $('.selectpicker').selectpicker();
+  });
     let temp = new Set();
     let places = new Set();
     // this.windowRef = this.userRequest.windowRef;

@@ -14,7 +14,7 @@
                         <input type="text" formControlName="phone" pattern="\d{10}" class="my-2 form-control">
                                                 
                         <label>ward</label>
-                        <input type="number" formControlName="ward" class="my-2 form-control">
+                        <input type="number" min=1 max=99 formControlName="ward" class="my-2 form-control">
                         
                         <label>specialisation</label>
                         <select formControlName="specialisation" id="" class="my-2 form-control">
@@ -22,14 +22,14 @@
                             <option value="Doctor"> Doctor </option>
                         </select>
                         
-                        <button class="my-2 btn btn-success" type="submit">Submit</button>
+                        <button class="my-2 btn btn-raised btn-success" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-8 px-2 pt-4 pb-2">
-            <div class="card shadow-lg p-4">
-                <table *ngIf = "volunteerlist" class="table table-bordered table-responsive" style="text-align: center;">
+            <div class="card shadow-lg p-4 table-responsive">
+                <table *ngIf = "volunteerlist" class="table table-bordered" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-warning': user.requestId}">
+                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-light': user.requestId}">
                             <td>{{user.name}}</td>
                             <td>{{user.phone}}</td>
                             <td>{{user.ward}}</td>

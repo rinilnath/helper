@@ -10,66 +10,118 @@
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="modal" data-target="#passwordreset">Reset Password</a>
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#passwordreset">Reset Password</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" (click)="signout()">Sign out</a>
+                    <a class="nav-link" href="" (click)="signout()">Sign out</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="row" style="justify-content: center;">
-    <div *ngFor="let user of volunteerTaskList"
-        [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
-        class="card shadow-lg col-lg-3 col-md-4 m-2">
-        <div class="card-body">
-            <div class="card-title d-flex">
-                <h4>{{user.username}}</h4>
-            </div>
-            <table class="table table-responsive">
-                <!-- <thead>
+    <ng-container *ngFor="let user of volunteerTaskList">
+        <div *ngIf = "user.status != 'Done' && user.status != 'Rejected'" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
+            class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div class="card-body">
+                <div class="card-title d-flex">
+                    <h4>{{user.username}}</h4>
+                </div>
+                <table class="table table-responsive">
+                    <!-- <thead>
                       <tr>
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>Email</th>
                       </tr>
                     </thead> -->
-                <tbody>
-                    <tr>
-                        <td>Mobile </td>
-                        <td> {{user.mobile}}</td>
-                    </tr>
-                    <tr>
-                        <td>Address </td>
-                        <td> {{user.address}}</td>
-                    </tr>
-                    <tr>
-                        <td>Required Item </td>
-                        <td> {{user.requireditem}}</td>
-                    </tr>
-                    <tr>
-                        <td>Status </td>
-                        <td> {{user.status}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="d-flex">
-                <div *ngIf="user.status == 'Assigned'">
-                    <button class="btn btn-primary mx-2" (click)="onAccept(user)"> Accept</button>
-                </div>
-                <div *ngIf="user.status == 'Assigned'">
-                    <button class="btn btn-danger mx-2" (click)="onRejected(user)"> Reject</button>
-                </div>
-                <div *ngIf="user.status == 'Confirmed'">
-                    <button class="btn btn-primary mx-2" (click)="onDone(user)"> Done</button>
-                </div>
-                <div *ngIf="user.status == 'Confirmed'">
-                    <button class="btn btn-primary mx-2" (click)="onNotDone(user)"> Not Done</button>
+                    <tbody>
+                        <tr>
+                            <td>Mobile </td>
+                            <td> {{user.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address </td>
+                            <td> {{user.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Item </td>
+                            <td> {{user.requireditem}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status </td>
+                            <td> {{user.status}}</td>
+                        </tr>                        
+                    </tbody>
+                </table>
+                <div class="d-flex">
+                    <div *ngIf="user.status == 'Assigned'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onAccept(user)"> Accept</button>
+                    </div>
+                    <div *ngIf="user.status == 'Assigned'">
+                        <button class="btn btn-raised btn-danger mx-2" (click)="onRejected(user)"> Reject</button>
+                    </div>
+                    <div *ngIf="user.status == 'Confirmed'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onDone(user)"> Done</button>
+                    </div>
+                    <div *ngIf="user.status == 'Confirmed'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onNotDone(user)"> Not Done</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </ng-container>
+    <ng-container *ngFor="let user of volunteerTaskList">
+        <div *ngIf = "user.status == 'Done' || user.status == 'Rejected'" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
+            class="card shadow-lg col-lg-3 col-md-4 m-2">
+            <div class="card-body">
+                <div class="card-title d-flex">
+                    <h4>{{user.username}}</h4>
+                </div>
+                <table class="table table-responsive">
+                    <!-- <thead>
+                      <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead> -->
+                    <tbody>
+                        <tr>
+                            <td>Mobile </td>
+                            <td> {{user.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address </td>
+                            <td> {{user.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Item </td>
+                            <td> {{user.requireditem}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status </td>
+                            <td> {{user.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex">
+                    <div *ngIf="user.status == 'Assigned'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onAccept(user)"> Accept</button>
+                    </div>
+                    <div *ngIf="user.status == 'Assigned'">
+                        <button class="btn btn-raised btn-danger mx-2" (click)="onRejected(user)"> Reject</button>
+                    </div>
+                    <div *ngIf="user.status == 'Confirmed'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onDone(user)"> Done</button>
+                    </div>
+                    <div *ngIf="user.status == 'Confirmed'">
+                        <button class="btn btn-raised btn-primary mx-2" (click)="onNotDone(user)"> Not Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 </div>
 
 <!-- Modal -->
