@@ -10,9 +10,9 @@
                 class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <h4 class="mt-3">{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>
@@ -51,9 +51,9 @@
                 class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <h4 class="mt-3">{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -67,7 +67,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>
@@ -91,9 +91,9 @@
             <div *ngIf="user.status == 'Submitted'" class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <h4 class="mt-3">{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -107,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>
@@ -128,9 +128,9 @@
                 class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <h4 class="mt-3">{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -144,7 +144,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>
@@ -164,9 +164,9 @@
                 class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-primary ml-auto mx-3"><i
-                                class="fa fa-edit"></i></button>
+                        <h4 class="mt-3">{{user.username}}</h4>
+                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -180,7 +180,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>
@@ -200,9 +200,9 @@
                 class="card shadow-lg col-lg-3 col-md-4 m-2">
                 <div class="card-body">
                     <div class="card-title d-flex">
-                        <h4>{{user.username}}</h4>
+                        <h4 class="mt-3">{{user.username}}</h4>
                         <button *ngIf="user.status != 'Done'" (click)="updateRequest(user)"
-                            class="btn btn-raised btn-info ml-auto mx-3"><i class="fa fa-edit"></i></button>
+                            class="btn btn-raised btn-link ml-auto mx-3"><i class="fa fa-edit fa-2x"></i></button>
                     </div>
                     <table class="table table-responsive">
                         <tbody>
@@ -216,7 +216,7 @@
                             </tr>
                             <tr>
                                 <td>Required Item </td>
-                                <td>: {{user.requireditem}}</td>
+                                <td>: {{user.requireditem | comareplacing}}</td>
                             </tr>
                             <tr>
                                 <td>Volunteer </td>

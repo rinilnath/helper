@@ -15,6 +15,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { VolunteersDashboardComponent } from './Components/volunteers-dashboard/volunteers-dashboard.component';
 import { AdminGuard } from './admin.guard';
 import { ValreplacingPipe } from './valreplacing.pipe';
+import { ComareplacingPipe } from './comareplacing.pipe';
 
 
 
@@ -26,7 +27,8 @@ import { ValreplacingPipe } from './valreplacing.pipe';
     AddVolunteersComponent, 
     NavbarComponent, 
     VolunteersDashboardComponent,
-    ValreplacingPipe
+    ValreplacingPipe,    
+    ComareplacingPipe,
   ],
   imports: [
     CommonModule,

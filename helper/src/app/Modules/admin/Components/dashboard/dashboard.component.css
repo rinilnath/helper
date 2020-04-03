@@ -1,3 +1,20 @@
 .bg-light {
     background-color: #6185c0!important;
 }
+.card {
+    height: 400px;
+    width: 300px;
+    overflow: auto;
+}
+.bg-danger {
+    background-color: #ff3547db !important;
+}
+
+.bg-success {
+    background-color: #00c85173 !important;
+}
+
+.bg-light{
+    background-color: #bcc8dc !important;
+}
+
