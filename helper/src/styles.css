@@ -12,18 +12,17 @@ body{
     font-weight: 700;
     margin-bottom:15px;
 }
-/* width */
 ::-webkit-scrollbar {
-    height: 5px;
-  }
-  
-  /* Handle */
+  width: 6px;
+  height: 10px;
+  background-color: #F5F5F5; }
+
   ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #4285F4; }
+  
+  .scrollbar-primary {
+  scrollbar-color: #4285F4 #F5F5F5;
   }
   
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }

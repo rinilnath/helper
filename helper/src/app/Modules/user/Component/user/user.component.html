@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container bg-white p-4">
     <form #form="ngForm">
-        <div class="form-group">
+        <div class="md-form">
             <label for="username" class="bmd-label-floating">Full Name:</label>
             <input type="text" class="form-control" id="username" #username="ngModel"
                 name="username" [(ngModel)]="userRequest.userRequestFormData.username" required>
@@ -9,22 +9,19 @@
                 This Field is required
             </div>
         </div>
-
-        <div class="form-group">
+        <div class="md-form">
             <label for="email" class="bmd-label-floating">Email:</label>
             <input type="email" class="form-control" id="email" #email="ngModel" name="email"
                 [(ngModel)]="userRequest.userRequestFormData.email"
                 pattern="^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$" required>
-            <span class="bmd-help">We'll never share your email with anyone else.</span>
             <div *ngIf="email.invalid && email.touched" class="alert alert-danger mt-2">
                 This Field is required and provide a valid email
             </div>
         </div>
-        <div class="form-group">
+        <div class="md-form">
             <label for="mobile" class="bmd-label-floating">Mobile:</label>
             <input type="text" class="form-control" id="mobile" #mobile="ngModel"
                 name="mobile" [(ngModel)]="userRequest.userRequestFormData.mobile" pattern="\d{10}" required>
-            <span class="bmd-help">We'll never share your mobile with anyone else.</span>
             <div *ngIf="mobile.invalid && mobile.touched" class="alert alert-danger mt-2">
                 This Field is required and should have 10 digit mobile number
             </div>
@@ -47,13 +44,13 @@
         <div *ngIf="user" class="alert alert-success my-2">
             Successfully verified your mobile number
         </div> -->
-
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="district">District:</label>
-                    <select class="form-control" id="district" #district="ngModel" name="district"
+                    <select class="mdb-select md-form colorful-select dropdown-primary" id="district" #district="ngModel" name="district"
                         [(ngModel)]="userRequest.userRequestFormData.district" required>
+                        <option value="" disabled selected>Choose your option</option>
                         <option *ngFor="let data of districtname" [value]="data">{{data | uppercase}}</option>
                     </select>
                 </div>
@@ -61,11 +58,13 @@
                     This Field is required
                 </div>
             </div>
+
             <div class="col">
                 <div class="form-group">
                     <label for="taluk">Place:</label>
-                    <select class="form-control" id="taluk" #taluk="ngModel" name="taluk"
+                    <select class="mdb-select md-form colorful-select dropdown-primary" id="taluk" #taluk="ngModel" name="taluk"
                         [(ngModel)]="userRequest.userRequestFormData.taluk" required>
+                        <option value="" disabled selected>Choose your option</option>
                         <option *ngFor="let data of place" [value]="data">{{data | uppercase}}</option>
                     </select>
                 </div>
@@ -86,7 +85,7 @@
                 </div>
             </div> -->
         </div>
-        <div class="form-group">
+        <div class="md-form">
             <label for="address" class="bmd-label-floating">Address:</label>
             <input type="text" class="form-control" id="address"
                 #address="ngModel" name="address" [(ngModel)]="userRequest.userRequestFormData.address" required>
@@ -96,8 +95,9 @@
         </div>
         <div class="form-group">
             <label for="requireditem">Select required item:</label>
-            <select data-style="bg-white px-4 py-3" class="selectpicker w-100" id="requireditem" #requireditem="ngModel" name="requireditem"
+            <select class="mdb-select md-form" id="requireditem" #requireditem="ngModel" name="requireditem"
                 [(ngModel)]="userRequest.userRequestFormData.requiredItem" multiple  required>
+                <option value="" disabled selected>Choose your option</option>
                 <option value="food">Food</option>
                 <option value="medicine">Medicine</option>
             </select>
@@ -113,11 +113,11 @@
             Track Your Request
         </h4>
         <form>
-            <div class="form-group">
-                <label for="mobile" class="bmd-label-floating">Mobile Number</label>
+            <div class="md-form">
+                <label for="trackingNumber" class="bmd-label-floating">Mobile Number</label>
                 <input type="text" [(ngModel)]="trackingNumber" name="trackingNumber" class="form-control"
-                   id="mobile">
-                <button (click)="onSubmitNumber()" class="btn btn-raised btn-success mt-2">Submit</button>
+                   id="trackingNumber">
+                <button (click)="onSubmitNumber()" class="btn btn-success mt-2">Submit</button>
             </div>
         </form>
         <table *ngIf="userDetails" class="table table-bordered mt-3">
@@ -147,7 +147,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-raised btn-success" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
 

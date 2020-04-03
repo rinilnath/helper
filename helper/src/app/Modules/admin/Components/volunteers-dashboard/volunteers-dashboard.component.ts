@@ -115,7 +115,7 @@ export class VolunteersDashboardComponent implements OnInit {
       this.success = ''
     if (!this.resetForm.invalid) {
       this.processing = 'Resetting ..';
-      this.dataservice.restPassword(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.resetForm.value.password).then(data => {
+      this.dataservice.restPassword(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), CryptoJS.AES.encrypt(this.resetForm.value.password, "akalgorija").toString()).then(data => {
         this.success = 'Successfully reset the password'
         this.processing = ''
       }).catch(data => {

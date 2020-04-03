@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ValreplacingPipe implements PipeTransform {
   transform(value: string): string {
-    value = value.replace('vol-','');
-    value = value.replace(new RegExp('req-', 'g'),'');
-    return value;
+    return (value.split(",").length - 1).toString();
   }
 }

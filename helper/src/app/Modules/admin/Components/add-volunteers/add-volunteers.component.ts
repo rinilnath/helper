@@ -5,6 +5,10 @@ import { DataService } from '../../Services/data.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import * as CryptoJS from 'crypto-js';
+
+declare var $: any;
+
 @Component({
   selector: 'app-add-volunteers',
   templateUrl: './add-volunteers.component.html',
@@ -30,14 +34,18 @@ export class AddVolunteersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(document).ready(function () {
+      $('.mdb-select').materialSelect();
+    });
   }
   
   onSubmit() {    
     this.volunteerForm.value.district = localStorage.getItem("District")
     this.volunteerForm.value.localbody = localStorage.getItem("LocalBody")
-    this.volunteerForm.value.password = "password1234"
-    if (!this.volunteerForm.invalid) {
-      this.dataservice.addVolunteer(this.volunteerForm.value.phone ,this.volunteerForm.value)
+    this.volunteerForm.value.password = CryptoJS.AES.encrypt("password1234", "akalgorija").toString()
+    if (!this.volunteerForm.invalid) {      
+      this.dataservice.addVolunteer(this.volunteerForm.value.phone ,this.volunteerForm.value);
+      $('#myModal').modal('show');
     }
     else {
       alert("invalid input")

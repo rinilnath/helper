@@ -6,22 +6,27 @@
 
                 <div class="card-body">
                     <h1 class="card-title">Add Volunteer</h1>
-                    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">                        
+                    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">   
+                        <div class="md-form">                 
                         <label>Name</label>
                         <input type="text" formControlName="name" class="my-2 form-control">
-                                                
+                         </div>
+                         <div class="md-form">                    
                         <label>Phone</label>
                         <input type="text" formControlName="phone" pattern="\d{10}" class="my-2 form-control">
-                                                
+                          </div>
+                          <div class="md-form">                      
                         <label>ward</label>
                         <input type="number" min=1 max=99 formControlName="ward" class="my-2 form-control">
-                        
-                        <label>specialisation</label>
-                        <select formControlName="specialisation" id="" class="my-2 form-control">
+                        </div>
+                        <div class="form-group">
+                        <label for="secl">specialisation</label>
+                        <select formControlName="specialisation" id="spcl" class="my-2 mdb-select md-form colorful-select dropdown-primary">
+                            <option value="" disabled selected>Choose your option</option>
                             <option value="Food Delivery"> Food Delivery </option>
                             <option value="Doctor"> Doctor </option>
                         </select>
-                        
+                        </div>
                         <button class="my-2 btn btn-raised btn-success" type="submit">Submit</button>
                     </form>
                 </div>
@@ -40,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-light': user.requestId}">
+                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-success': user.requestId}">
                             <td>{{user.name}}</td>
                             <td>{{user.phone}}</td>
                             <td>{{user.ward}}</td>
@@ -50,6 +55,20 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Sucessfully added</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

@@ -67,7 +67,7 @@ export class SignInComponent implements OnInit {
     this.dataservice.getVolunteer("vol-" + this.signinForm.value.email).valueChanges().subscribe(
       async res => {
         req = res
-        if (req && (req.password == this.signinForm.value.password)) {
+        if (req && (CryptoJS.AES.decrypt(req.password, "akalgorija").toString(CryptoJS.enc.Utf8) == this.signinForm.value.password)) {
           const redirectUrl = 'admin/volunteer';
           localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "akalgorija"));
           sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "jarigoalak"));

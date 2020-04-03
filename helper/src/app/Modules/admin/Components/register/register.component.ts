@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { DataService } from '../../Services/data.service';
 import { districts } from '../../../user/Services/geographyDetails'
+declare var $: any;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -37,9 +38,10 @@ export class RegisterComponent implements OnInit {
           }).then(async data => {
             //console.log(data)
             this.processing=''
-            this.success = "Succesfuly registered . Redirecting you to dashboard"
-            await this.authservice.signout()
-            this.router.navigate(['admin/dash'])
+            this.success = "Succesfuly registered"
+            // await this.authservice.signout()
+            $('#myModal').modal('show');
+            this.registrationForm.reset();
           })
           .catch(data => console.log(data))
 
@@ -52,6 +54,9 @@ export class RegisterComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    $(document).ready(function () {
+      $('.mdb-select').materialSelect();
+    });
   }
 
 }
