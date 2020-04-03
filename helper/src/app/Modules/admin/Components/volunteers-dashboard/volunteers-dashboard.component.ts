@@ -19,6 +19,7 @@ declare var toastr: any;
 export class VolunteersDashboardComponent implements OnInit {
 
   volunteerlist;
+  volname;
   volunteerTaskList: UserRequest[]
   totalTaskCount: number
   waitingForAcceptTaskCount: number
@@ -47,7 +48,7 @@ export class VolunteersDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // this.auth.getUserDetails();
-
+    this.volname = localStorage.getItem("username");
     this.totalTaskCount = this.volunteerTaskList && this.volunteerTaskList.length;
 
     this.volunteerTaskList && this.volunteerTaskList.forEach(task => {

@@ -19,9 +19,10 @@
         </div>
     </div>
 </nav>
+<p class="ml-4 mt-3">Welcome {{volname}}</p>
 <div class="row" style="justify-content: center;">
     <ng-container *ngFor="let user of volunteerTaskList">
-        <div *ngIf = "user.status != 'Done' && user.status != 'Rejected'" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
+        <div *ngIf = "user.status != 'Done' && user.status != 'Rejected'" [ngClass]="{'bg-info': user.status=='Confirmed', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
             class="card shadow-lg col-lg-3 col-md-4 m-2">
             <div class="card-body">
                 <div class="card-title d-flex">

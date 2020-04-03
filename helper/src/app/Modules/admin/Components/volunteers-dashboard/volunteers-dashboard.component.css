@@ -4,3 +4,20 @@
 .modal-backdrop.show:nth-of-type(even) {
     z-index: 1061 !important;
 }
+
+.bg-danger {
+    background-color: #ff3547db !important;
+}
+
+.bg-success {
+    background-color: #00c85173 !important;
+}
+
+.bg-light{
+    background-color: #bcc8dc !important;
+}
+.card {
+    height: 400px;
+    width: 400px;
+    overflow: auto;
+}

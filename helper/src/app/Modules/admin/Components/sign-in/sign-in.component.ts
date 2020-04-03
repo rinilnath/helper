@@ -71,6 +71,7 @@ export class SignInComponent implements OnInit {
           const redirectUrl = 'admin/volunteer';
           localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "akalgorija"));
           sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "jarigoalak"));
+          localStorage.setItem("username",req.name);
           this.router.navigate([redirectUrl]);
         } else {
           this.processing = ''
