@@ -8,6 +8,7 @@ import * as CryptoJS from 'crypto-js';
 import { AuthService } from '../../Services/auth.service';
 import { DataService } from '../../Services/data.service';
 declare var $: any;
+declare var toastr: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -89,7 +90,7 @@ export class VolunteersDashboardComponent implements OnInit {
       this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
       this.dataservice.updateTaskStatus(task);
     } else {
-      alert("Please provide reason for rejection")
+      toastr.error("Please provide reason for rejection")
     }
   }
   onNotDone(task) {
@@ -100,7 +101,7 @@ export class VolunteersDashboardComponent implements OnInit {
       this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
       this.dataservice.updateTaskStatus(task);
     } else {
-      alert("Please provide reason")
+      toastr.error("Please provide reason")
     }
   }
 

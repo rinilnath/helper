@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as CryptoJS from 'crypto-js';
+declare var $: any;
+declare var toastr: any;
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,16 @@ export class AuthService {
 
   getUser() {
     this.auth.user.subscribe(data => data.uid)
+  }
+
+  resetPass(email){
+    this.auth.sendPasswordResetEmail(email).then(
+      () => {        
+        toastr.success("Password reset mail send")
+      },
+      err => {
+        toastr.error("Failed to send mail check your mail address")
+      });
   }
 
   // getUserDetails() {

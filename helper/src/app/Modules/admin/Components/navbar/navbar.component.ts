@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 
+declare var $: any;
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth:AuthService,public router:Router) { }
+  constructor(public auth: AuthService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +23,9 @@ export class NavbarComponent implements OnInit {
         location.reload();
       })
       .catch(data => console.log(data))
+  }
+  resetpassword() {
+    let email = $("#resetpassword").val()
+    this.auth.resetPass(email)
   }
 }

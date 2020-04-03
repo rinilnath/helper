@@ -7,6 +7,7 @@ import { Volunteer } from '../../Services/volunteer.model';
 import { UserRequest } from 'src/app/Modules/user/Services/userRequest.model';
 
 declare var $: any;
+declare var toastr: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -68,7 +69,7 @@ export class DashboardComponent implements OnInit {
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
-      alert("already assigned a volunteer")
+      toastr.error("already assigned a volunteer")
     }
   }
 
@@ -80,7 +81,7 @@ export class DashboardComponent implements OnInit {
     this.dataSevice.updateVolunteerInUser(this.currentRequest);
     this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
-      alert("Wrong Request")
+      toastr.error("Wrong Request")
     }
   }
 

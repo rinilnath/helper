@@ -19,6 +19,9 @@
                     <a class="nav-link" href="/admin/register">Add Local Body</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#passreset" href="">Reset Password</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="" (click)="signout()">Sign out</a>
                 </li>
 
@@ -26,3 +29,18 @@
         </div>
     </div>
 </nav>
+<div id="passreset" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Provide email for sending password reset mail</p>
+                <input class="form-control" id="resetpassword">
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click) = "resetpassword()" class="btn btn-primary" data-dismiss="modal">Send</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

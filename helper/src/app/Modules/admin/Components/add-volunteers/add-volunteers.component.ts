@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 declare var $: any;
+declare var toastr: any;
 
 @Component({
   selector: 'app-add-volunteers',
@@ -48,7 +49,7 @@ export class AddVolunteersComponent implements OnInit {
       $('#myModal').modal('show');
     }
     else {
-      alert("invalid input")
+      $(function () { toastr.error("invalid input")})
     }
   }
 }
