@@ -10,4 +10,7 @@ export class UserRequest {
     requiredItem: string;
     status: string;
     volunteerId: string;
+    comment: string;
+    date: string;
+    description: string;
 }

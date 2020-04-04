@@ -54,6 +54,10 @@ export class DataService {
     return this.fire.collection("volunteers").doc(uid).set(data)
   }
 
+  deleteVolunteer(data) {
+    return this.fire.collection("volunteers").doc(data.id).delete()
+  }
+
   restPassword(uid, passwordData) {
     return this.fire.doc("volunteers/" + uid).update({
       password: passwordData

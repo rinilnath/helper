@@ -1,243 +1,399 @@
 <app-navbar></app-navbar>
-<div class="container-fluid py-4">
-    <div style="text-align: right;">
-        <p>District : {{district}}</p>
-        <p style="margin-top: -15px;">Local Body : {{localbody}}</p>
-    </div>
-    <div class="row" style="justify-content: center;">
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Not Done'" [ngClass]="{'bg-danger': user.status=='Not Done'}"
-                class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
-                                class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: {{user.volunteerId | reqreplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                            <tr>
-                                <td>Discription </td>
-                                <td>: {{user.Discription}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Rejected'" [ngClass]="{'bg-danger': user.status=='Rejected'}"
-                class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
-                                class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: {{user.volunteerId | reqreplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                            <tr>
-                                <td>Discription </td>
-                                <td>: {{user.Discription}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Submitted'" class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
-                                class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: Not Assigned</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Assigned'" [ngClass]="{'bg-light': user.status=='Assigned'}"
-                class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
-                                class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: {{user.volunteerId | reqreplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Confirmed'" [ngClass]="{'bg-info': user.status=='Confirmed'}"
-                class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
-                                class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: {{user.volunteerId | reqreplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngFor="let user of requestDetails">
-            <div *ngIf="user.status == 'Done'" [ngClass]="{'bg-success': user.status=='Done'}"
-                class="card shadow-lg col-lg-3 col-md-4 m-2">
-                <div class="card-body">
-                    <div class="card-title d-flex">
-                        <h4 class="mt-3">{{user.username}}</h4>
-                        <button *ngIf="user.status != 'Done'" (click)="updateRequest(user)"
-                            class="btn btn-raised btn-link ml-auto mx-3"><i class="fa fa-edit fa-2x"></i></button>
-                    </div>
-                    <table class="table table-responsive">
-                        <tbody>
-                            <tr>
-                                <td>Mobile </td>
-                                <td>: {{user.mobile}}</td>
-                            </tr>
-                            <tr>
-                                <td>Address </td>
-                                <td>: {{user.address}}</td>
-                            </tr>
-                            <tr>
-                                <td>Required Item </td>
-                                <td>: {{user.requireditem | comareplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer </td>
-                                <td>: {{user.volunteerId | reqreplacing}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status </td>
-                                <td>: {{user.status}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </ng-container>
-    </div>
+<div class="mr-2" style="text-align: right;">
+    <p>District : {{district}}</p>
+    <p style="margin-top: -15px;">Local Body : {{localbody}}</p>
 </div>
 
+<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+    <div class="card">
+        <div class="card-header mdb-color darken-1" role="tab" id="headingOne1">
+            <a class="collapsed white-text" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1"
+                aria-expanded="false" aria-controls="collapseOne1">
+                <p class="mb-0">
+                    Rejected and Not-Done Reqest <i class="fa fa-angle-down rotate-icon"></i>
+                </p>
+            </a>
+        </div>
+        <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+            data-parent="#accordionEx">
+            <div class="row" style="justify-content: center;">
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Not Done'" [ngClass]="{'bg-danger': user.status=='Not Done'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description </td>
+                                        <td>: {{user.description}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Rejected'" [ngClass]="{'bg-danger': user.status=='Rejected'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description </td>
+                                        <td>: {{user.description}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-1">
+        <div class="card-header mdb-color darken-1" role="tab" id="headingOne2">
+            <a class="white-text" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne2"
+                aria-expanded="true" aria-controls="collapseOne2">
+                <p class="mb-0">
+                    New Request <i class="fa fa-angle-down rotate-icon"></i>
+                </p>
+            </a>
+        </div>
+        <div id="collapseOne2" class="collapse show" role="tabpane1" aria-labelledby="headingOne1"
+            data-parent="#accordionEx">
+            <div class="row" style="justify-content: center;">
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Submitted'" class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: Not Assigned</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-1">
+        <div class="card-header mdb-color darken-1" role="tab" id="headingOne5">
+            <a class="collapsed text-white" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne5"
+                aria-expanded="false" aria-controls="collapseOne5">
+                <p class="mb-0">
+                    Assigned Reqest <i class="fa fa-angle-down rotate-icon"></i>
+                </p>
+            </a>
+        </div>
+        <div id="collapseOne5" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+            data-parent="#accordionEx">
+            <div class="row" style="justify-content: center;">
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Assigned'" [ngClass]="{'bg-light': user.status=='Assigned'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-1">
+        <div class="card-header mdb-color darken-1" role="tab" id="headingOne3">
+            <a class="collapsed white-text" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne3"
+                aria-expanded="false" aria-controls="collapseOne3">
+                <p class="mb-0">
+                    Confirmed Request <i class="fa fa-angle-down rotate-icon"></i>
+                </p>
+            </a>
+        </div>
+        <div id="collapseOne3" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+            data-parent="#accordionEx">
+            <div class="row" style="justify-content: center;">
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Confirmed'" [ngClass]="{'bg-info': user.status=='Confirmed'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button (click)="updateRequest(user)" class="btn btn-md btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-1">
+        <div class="card-header mdb-color darken-1" role="tab" id="headingOne4">
+            <a class="collapsed text-white" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne4"
+                aria-expanded="false" aria-controls="collapseOne4">
+                <p class="mb-0">
+                    Completed and Cancelled Request <i class="fa fa-angle-down rotate-icon"></i>
+                </p>
+            </a>
+        </div>
+        <div id="collapseOne4" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+            data-parent="#accordionEx">
+            <div class="row" style="justify-content: center;">
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Done'" [ngClass]="{'bg-success': user.status=='Done'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button *ngIf="user.status != 'Done'" (click)="updateRequest(user)"
+                                    class="btn btn-raised btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngFor="let user of requestDetails">
+                    <div *ngIf="user.status == 'Cancelled'" [ngClass]="{'bg-default': user.status=='Cancelled'}"
+                        class="card shadow-lg col-lg-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <div class="card-title d-flex">
+                                <h4 class="mt-3 text-dark">{{user.username}} <span
+                                        style="font-size: 15px;">({{user.date}})</span>
+                                </h4>
+                                <button *ngIf="user.status != 'Done'" (click)="updateRequest(user)"
+                                    class="btn btn-raised btn-link ml-auto mx-3"><i
+                                        class="fa fa-edit fa-2x"></i></button>
+                            </div>
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>Mobile </td>
+                                        <td>: {{user.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address </td>
+                                        <td>: {{user.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Required Item </td>
+                                        <td>: {{user.requireditem | comareplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description </td>
+                                        <td>: {{user.description}}</td>
+                                    </tr>
+                                    <tr *ngIf="user.comment">
+                                        <td>Comments</td>
+                                        <td>: {{user.comment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Volunteer </td>
+                                        <td>: {{user.volunteerId | reqreplacing}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status </td>
+                                        <td>: {{user.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>        
+    </div>
+</div>
 <!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
+<div class="modal fade bottom" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-full-height modal-bottom .modal-lg">
         <div class="modal-content">
 
             <!-- Modal Header -->
@@ -273,6 +429,7 @@
                                 <td *ngIf="user.requestId"><button (click)='removeVolunteer(user)'
                                         class="btn btn-danger">Remove</button></td>
                             </tr>
+
                         </ng-container>
                     </tbody>
                     <tbody
@@ -283,10 +440,9 @@
                                 <td>{{user.phone}}</td>
                                 <td>{{user.specialisation}}</td>
                                 <td>{{user.ward}}</td>
-                                <td *ngIf = "!user.requestId">{{user.requestId}}</td>
-                                <td *ngIf = "user.requestId">{{user.requestId | valreplacing}}</td>
-                                <td><button (click)='assignVolunteer(user)'
-                                        class="btn btn-primary">Assign</button></td>
+                                <td *ngIf="!user.requestId">{{user.requestId}}</td>
+                                <td *ngIf="user.requestId">{{user.requestId | valreplacing}}</td>
+                                <td><button (click)='assignVolunteer(user)' class="btn btn-primary">Assign</button></td>
                             </tr>
                         </ng-container>
                     </tbody>
@@ -295,6 +451,9 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button (click)="cancel()"
+                    *ngIf="currentVolunteer == 'Rejected' || currentVolunteer == 'Not Done' || currentVolunteer == 'Submitted'"
+                    type="button" class="btn btn-raised btn-grey" data-dismiss="modal">Cancel Request</button>
                 <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal">Close</button>
             </div>
 

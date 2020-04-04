@@ -41,16 +41,18 @@
                             <th>ward</th>
                             <th>Specialisation</th>
                             <th>Request Assigned</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of volunteerlist | async" [ngClass]="{'bg-success': user.requestId}">
+                        <tr *ngFor="let user of volunteerlist" [ngClass]="{'grey lighten-1': user.requestId}">
                             <td>{{user.name}}</td>
                             <td>{{user.phone}}</td>
                             <td>{{user.ward}}</td>
                             <td>{{user.specialisation}}</td>
                             <td *ngIf = "user.requestId">yes</td>
                             <td *ngIf = "!user.requestId">No</td>
+                            <td><button type="button" data-toggle="tooltip" title="Click to delete the volunteer" (click) = "delete(user)" class="btn btn-link btn-sm"><i class="fa fa-trash fa-2x"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

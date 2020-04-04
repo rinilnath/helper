@@ -1,8 +1,8 @@
 .bg-light {
     background-color: #6185c0!important;
 }
-.card {
-    height: 400px;
+.card .shadow-lg {
+    height: 450px;
     width: 300px;
     overflow: auto;
 }

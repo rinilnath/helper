@@ -22,11 +22,11 @@
 <p class="ml-4 mt-3">Welcome {{volname}}</p>
 <div class="row" style="justify-content: center;">
     <ng-container *ngFor="let user of volunteerTaskList">
-        <div *ngIf = "user.status != 'Done' && user.status != 'Rejected'" [ngClass]="{'bg-info': user.status=='Confirmed', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
+        <div *ngIf = "user.status != 'Done' && user.status != 'Rejected' && user.status != 'Not Done'" [ngClass]="{'bg-info': user.status=='Confirmed'}"
             class="card shadow-lg col-lg-3 col-md-4 m-2">
             <div class="card-body">
                 <div class="card-title d-flex">
-                    <h4>{{user.username}}</h4>
+                    <h4>{{user.username}} <span style="font-size: 15px;">({{user.date}})</span></h4>
                 </div>
                 <table class="table table-responsive">
                     <!-- <thead>
@@ -48,6 +48,10 @@
                         <tr>
                             <td>Required Item </td>
                             <td> {{user.requireditem}}</td>
+                        </tr>
+                        <tr *ngIf ="user.comment">
+                            <td>Comments</td>
+                            <td>: {{user.comment}}</td>
                         </tr>
                         <tr>
                             <td>Status </td>
@@ -73,11 +77,11 @@
         </div>
     </ng-container>
     <ng-container *ngFor="let user of volunteerTaskList">
-        <div *ngIf = "user.status == 'Done' || user.status == 'Rejected'" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
+        <div *ngIf = "user.status == 'Done' || user.status == 'Rejected' || user.status == 'Not Done'" [ngClass]="{'bg-success': user.status=='Done', 'bg-danger': (user.status=='Rejected' || user.status=='Not Done')}"
             class="card shadow-lg col-lg-3 col-md-4 m-2">
             <div class="card-body">
                 <div class="card-title d-flex">
-                    <h4>{{user.username}}</h4>
+                    <h4>{{user.username}} <span style="font-size: 15px;">({{user.date}})</span></h4>
                 </div>
                 <table class="table table-responsive">
                     <!-- <thead>
@@ -99,6 +103,10 @@
                         <tr>
                             <td>Required Item </td>
                             <td> {{user.requireditem}}</td>
+                        </tr>
+                        <tr *ngIf ="user.comment">
+                            <td>Comments</td>
+                            <td>: {{user.comment}}</td>
                         </tr>
                         <tr>
                             <td>Status </td>

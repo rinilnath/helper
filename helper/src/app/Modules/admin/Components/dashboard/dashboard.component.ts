@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../Services/data.service';
-import { Observable } from 'rxjs';
 import { Volunteer } from '../../Services/volunteer.model';
 import { UserRequest } from 'src/app/Modules/user/Services/userRequest.model';
 
@@ -21,6 +20,7 @@ export class DashboardComponent implements OnInit {
   district: string;
   localbody: string;
   currentRequest: UserRequest;
+  currentVolunteer;
 
 
 
@@ -55,34 +55,37 @@ export class DashboardComponent implements OnInit {
 
   updateRequest(user) {
     this.currentRequest = user;
+    this.currentVolunteer = user.status;
     $('#myModal').modal('show');
   }
 
   assignVolunteer(volunteer: Volunteer) {
-    if(!this.currentRequest.volunteerId || this.currentRequest.status == 'Rejected' || this.currentRequest.status == 'Not Done'){
-    this.currentRequest.volunteerId = volunteer.id;
-    this.currentRequest.status = "Assigned"
-    if(volunteer.requestId == null) {
-      volunteer.requestId = "";
-    }
-    volunteer.requestId += this.currentRequest.id+", ";
-    this.dataSevice.updateVolunteerInUser(this.currentRequest);
-    this.dataSevice.updateUserInVolunteer(volunteer);
+    if (!this.currentRequest.volunteerId || this.currentRequest.status == 'Rejected' || this.currentRequest.status == 'Not Done') {
+      this.currentRequest.volunteerId = volunteer.id;
+      this.currentRequest.status = "Assigned"
+      if (volunteer.requestId == null) {
+        volunteer.requestId = "";
+      }
+      volunteer.requestId += this.currentRequest.id + ", ";
+      this.dataSevice.updateVolunteerInUser(this.currentRequest);
+      this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
       toastr.error("already assigned a volunteer")
     }
+    this.currentVolunteer = this.currentRequest.status;
   }
 
   removeVolunteer(volunteer: Volunteer) {
-    if(this.currentRequest.volunteerId == volunteer.id) {
-    this.currentRequest.volunteerId = null;
-    volunteer.requestId = volunteer.requestId.replace(this.currentRequest.id+", ","");
-    this.currentRequest.status = "Submitted";
-    this.dataSevice.updateVolunteerInUser(this.currentRequest);
-    this.dataSevice.updateUserInVolunteer(volunteer);
+    if (this.currentRequest.volunteerId == volunteer.id) {
+      this.currentRequest.volunteerId = null;
+      volunteer.requestId = volunteer.requestId.replace(this.currentRequest.id + ", ", "");
+      this.currentRequest.status = "Submitted";
+      this.dataSevice.updateVolunteerInUser(this.currentRequest);
+      this.dataSevice.updateUserInVolunteer(volunteer);
     } else {
       toastr.error("Wrong Request")
     }
+    this.currentVolunteer = this.currentRequest.status;
   }
 
   signout() {
@@ -92,5 +95,16 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['admin/login'])
       })
       .catch(data => console.log(data))
+  }
+
+  cancel() {
+    let reason = prompt("Reason for cancellation");
+    this.currentRequest.status = "Cancelled";
+    this.currentRequest.description = reason;
+    if (reason != "") {
+      this.dataSevice.updateVolunteerInUser(this.currentRequest)
+    } else {
+      toastr.error("Provide reason for cancellation");
+    }
   }
 }

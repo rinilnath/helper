@@ -67,12 +67,18 @@ export class SignInComponent implements OnInit {
     this.dataservice.getVolunteer("vol-" + this.signinForm.value.email).valueChanges().subscribe(
       async res => {
         req = res
-        if (req && (CryptoJS.AES.decrypt(req.password, "akalgorija").toString(CryptoJS.enc.Utf8) == this.signinForm.value.password)) {
-          const redirectUrl = 'admin/volunteer';
-          localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "akalgorija"));
-          sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "jarigoalak"));
-          localStorage.setItem("username",req.name);
-          this.router.navigate([redirectUrl]);
+        if (req) {
+          if (CryptoJS.AES.decrypt(req.password, "akalgorija").toString(CryptoJS.enc.Utf8) == this.signinForm.value.password) {
+            const redirectUrl = 'admin/volunteer';
+            localStorage.setItem("userId", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "akalgorija"));
+            sessionStorage.setItem("key", CryptoJS.AES.encrypt("vol-" + this.signinForm.value.email.trim(), "jarigoalak"));
+            localStorage.setItem("username", req.name);
+            this.router.navigate([redirectUrl]);
+          } else {
+            this.processing = ''
+            $('.modal-body').html("<p>Incorrect password</p>");
+            $('#myModal').modal('show');
+          }
         } else {
           this.processing = ''
           $('.modal-body').html("<p>User not exist with this details</p><p>Please check with Local-Body</p><p><i>Volunteers please login with mobile number</i></p>");

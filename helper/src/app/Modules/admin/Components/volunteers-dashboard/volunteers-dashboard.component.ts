@@ -73,19 +73,22 @@ export class VolunteersDashboardComponent implements OnInit {
   }
 
   onDone(task) {
-    task.status = 'Done';
-    this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
-    this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
-    this.dataservice.updateTaskStatus(task);
+    if(confirm("Are you sure the task was completed !")) {
+      task.status = 'Done';
+      this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
+      this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
+      this.dataservice.updateTaskStatus(task);
+    }
   }
 
   onAccept(task) {
     task.status = 'Confirmed';
     this.dataservice.updateTaskStatus(task);
   }
+
   onRejected(task) {
-    task.Discription = prompt("Reason For Rejection")
-    if (task.Discription) {
+    task.description = prompt("Reason For Rejection")
+    if (task.description) {
       task.status = 'Rejected';
       this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
       this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)
@@ -95,8 +98,8 @@ export class VolunteersDashboardComponent implements OnInit {
     }
   }
   onNotDone(task) {
-    task.Discription = prompt("Please provide reason")
-    if (task.Discription) {
+    task.description = prompt("Please provide reason")
+    if (task.description) {
       task.status = 'Not Done';
       this.volunteerlist.requestId = this.volunteerlist.requestId.replace(task.id + ", ", "");
       this.dataservice.updateVolunteer(CryptoJS.AES.decrypt(localStorage.getItem("userId"), "akalgorija").toString(CryptoJS.enc.Utf8), this.volunteerlist)

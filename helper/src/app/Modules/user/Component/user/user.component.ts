@@ -107,6 +107,12 @@ export class UserComponent implements OnInit {
     let req;
     let flag = false;
     let flag2 = false;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    data.date = mm + '/' + dd + '/' + yyyy;
+    
     if (false) {//this.user == undefined) {
       alert("Mobile Number not verified")
     } else {
@@ -151,7 +157,10 @@ export class UserComponent implements OnInit {
       address: "",
       requiredItem: "",
       status: "",
-      volunteerId: ""
+      volunteerId: "",
+      comment: "",
+      date : "",
+      description : ""
     }
   }
 }
