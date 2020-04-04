@@ -98,8 +98,9 @@ export class DashboardComponent implements OnInit {
   }
 
   cancel() {
-    let reason = prompt("Reason for cancellation");
-    if (reason != "") {
+    let reason = "";
+    reason = prompt("Reason for cancellation");
+    if (reason) {
       this.currentRequest.status = "Cancelled";
       this.currentRequest.description = reason;
       this.dataSevice.updateVolunteerInUser(this.currentRequest)
