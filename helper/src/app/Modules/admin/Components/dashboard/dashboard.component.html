@@ -9,13 +9,13 @@
     <div class="card">
         <div class="card-header mdb-color darken-1" role="tab" id="headingOne1">
             <a class="collapsed white-text" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1"
-                aria-expanded="false" aria-controls="collapseOne1">
+                aria-expanded="true" aria-controls="collapseOne1">
                 <p class="mb-0">
                     Rejected and Not-Done Reqest <i class="fa fa-angle-down rotate-icon"></i>
                 </p>
             </a>
         </div>
-        <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+        <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
             data-parent="#accordionEx">
             <div class="row" style="justify-content: center;">
                 <ng-container *ngFor="let user of requestDetails">
