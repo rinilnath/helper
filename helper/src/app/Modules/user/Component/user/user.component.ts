@@ -112,6 +112,7 @@ export class UserComponent implements OnInit {
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     data.date = mm + '/' + dd + '/' + yyyy;
+    data.description = "";
     
     if (false) {//this.user == undefined) {
       alert("Mobile Number not verified")
@@ -120,8 +121,12 @@ export class UserComponent implements OnInit {
         this.getRequest(this.userRequest.userRequestFormData.mobile).subscribe(res => {
           req = res;
           req.forEach(function (values) {
-            if (values.mobile == data.mobile && values.status != 'Done') {
+            if (values.mobile == data.mobile) {
               flag = true
+              if(values.status == 'Done')
+                flag = false
+              else if(values.status == 'Cancelled')
+                flag = false
             }
           });
           if (flag && !flag2) {

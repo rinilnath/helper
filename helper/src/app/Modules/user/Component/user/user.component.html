@@ -127,22 +127,26 @@
                 <button (click)="onSubmitNumber()" class="btn btn-success mt-2">Submit</button>
             </div>
         </form>
-        <table *ngIf="userDetails" class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of userDetails">
-                    <td>{{user.username}}</td>
-                    <td>{{user.mobile}}</td>
-                    <td>{{user.status}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow: auto;">
+            <table *ngIf="userDetails" class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Status</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userDetails">
+                        <td>{{user.username}}</td>
+                        <td>{{user.mobile}}</td>
+                        <td>{{user.status}}</td>
+                        <td>{{user.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- Modal -->
