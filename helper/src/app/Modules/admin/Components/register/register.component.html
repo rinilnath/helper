@@ -28,25 +28,25 @@
 							</div>
 						</div>						
 						<label>Municipality / Panchayath</label>
-						<input type="text" formControlName="name" id="" class="my-2 form-control">
+						<input type="text" formControlName="name" id="mun" class="my-2 form-control">
 						<div *ngIf="registrationForm.controls['name'].invalid && (registrationForm.controls['name'].dirty || registrationForm.controls['name'].touched)"
 							class="my-2 alert alert-danger">
 							Municipality / Panchayath name is required
 						</div>
 						<label>Email</label>
-						<input type="email" formControlName="email" id="" class="my-2 form-control">
+						<input type="email" formControlName="email" id="email" class="my-2 form-control">
 						<div *ngIf="registrationForm.controls['email'].invalid && (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)"
 							class="my-2 alert alert-danger">
 							Please enter valid email id
 						</div>
 						<label>Password</label>
-						<input type="password" formControlName="password" id="" class="my-2 form-control">
+						<input type="password" formControlName="password" id="password" class="my-2 form-control">
 						<div *ngIf="registrationForm.controls['password'].invalid && (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)"
 							class="my-2 alert alert-danger">
 							Passwords should be atleast 8 charecters in length
 						</div>						
 						<label>Confirm Password</label>
-						<input type="password" formControlName="rpassword" id="" class="my-2 form-control">
+						<input type="password" formControlName="rpassword" id="rpassword" class="my-2 form-control">
 						<div *ngIf="(registrationForm.controls['rpassword'].invalid && (registrationForm.controls['rpassword'].dirty || registrationForm.controls['rpassword'].touched))|| (registrationForm.controls['rpassword'].value!=registrationForm.controls['password'].value)"
 							class="my-2 alert alert-danger">
 							Passwords dont match

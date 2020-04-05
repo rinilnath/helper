@@ -168,13 +168,13 @@
                     Passwords should be atleast 8 charecters in length
                 </div>
                 <label>Password</label>
-                <input type="password" formControlName="password" id="" class="my-2 form-control">
+                <input type="password" formControlName="password" id="password" class="my-2 form-control">
                 <div *ngIf="(resetForm.controls['rpassword'].invalid && (resetForm.controls['rpassword'].dirty || resetForm.controls['rpassword'].touched))|| (resetForm.controls['rpassword'].value!=resetForm.controls['password'].value)"
                     class="my-2 alert alert-danger">
                     Passwords dont match
                 </div>
                 <label>Confirm Password</label>
-                <input type="password" formControlName="rpassword" id="" class="my-2 form-control">
+                <input type="password" formControlName="rpassword" id="rpassword" class="my-2 form-control">
                 <div class="d-flex">
                     <button class="btn btn-success" type="submit">Submit</button>
                     <button type="button" class="btn btn-danger ml-3" data-dismiss="modal">Close</button>
